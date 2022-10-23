@@ -1,3 +1,4 @@
+// 观察者模式
 class Deep {
   constructor() {
     this.state = null;
@@ -18,7 +19,7 @@ class Deep {
   }
 }
 
-class Wather {
+class Watcher {
   constructor(name, deep) {
     this.name = name;
     this.deep = deep;
@@ -32,6 +33,7 @@ class Wather {
 }
 
 const deep = new Deep();
-const wather1 = new Wather("wather1", deep);
-const wather2 = new Wather("wather2", deep);
-const wather3 = new Wather("wather3", deep);
+const wather1 = new Watcher("wather1", deep);
+const wather2 = new Watcher("wather2", deep);
+const wather3 = new Watcher("wather3", deep);
+deep.setState("￥1000,000");
