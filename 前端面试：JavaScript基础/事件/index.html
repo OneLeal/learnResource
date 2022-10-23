@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js 事件</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .self-event {
+            margin: 0;
+            padding: 0;
+            width: 120px;
+            height: 35px;
+            text-align: center;
+            border-radius: 4px;
+            line-height: 35px;
+            color: #fff;
+            background-color: #409EFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>js 基础 第七课：事件</h1>
+
+    <div class="wrap">
+        <div class="container">
+            <p class="title">事件代理（jQuery）</p>
+
+            <ul id="music1">
+                <li><a href="#">空山新雨后</a></li>
+                <li><a href="#">盛夏的果实</a></li>
+                <li><a href="#">那女孩对我说</a></li>
+            </ul>
+
+            <button id="load1" class="btn">加载更多</button>
+        </div>
+
+        <div class="container">
+            <p class="title">事件代理（JavaScript）</p>
+
+            <ul id="music2">
+                <li><a href="#">空山新雨后</a></li>
+                <li><a href="#">盛夏的果实</a></li>
+                <li><a href="#">那女孩对我说</a></li>
+            </ul>
+
+            <button id="load2" class="btn">加载更多</button>
+        </div>
+    </div>
+
+    <p>阻止冒泡：e.stopPropagation(); (IE: e.cancelBubble = true)</p>
+    <p>阻止默认事件执行：e.preventDefault();</p>
+    <div class="self-event" id="self-event">自定义事件</div>
+</body>
+<script type="text/javascript" src="../jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="event.js"></script>
+<script type="text/javascript">
+    var msg = {
+        status: 200,
+        info: '请求成功',
+        arr: [1, 2, 3]
+    };
+    var emitter = new CustomEvent('test', { detail: msg, bubbles: true, cancelable: false });
+    document.getElementById('self-event').addEventListener('test', (e) => {
+        console.log(e);
+    });
+    setTimeout(() => {
+        document.getElementById('self-event').dispatchEvent(emitter);
+    }, 1000);
+
+    /*
+    * 关于事件对象的属性：cancelable 和 bubbles
+    *
+    * bubbles: 属性返回一个布尔值，表示当前事件是否会冒泡。
+    * 该属性为只读属性，只能在新建事件时改变。
+    * 除非显式声明，Event构造函数生成的事件，默认是不冒泡的。
+    *
+    * cancelable: 属性返回一个布尔值，表示事件是否可以取消。
+    * 该属性为只读属性，只能在新建事件时改变。
+    * 除非显式声明，Event构造函数生成的事件，默认是不可以取消的。
+    * */
+</script>
+</html>

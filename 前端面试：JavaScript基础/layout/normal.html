@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>普通的三栏布局</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        header, footer {
+            height: 50px;
+            line-height: 50px;
+            background-color: #666;
+            text-align: center;
+        }
+
+        .wrap {
+            margin-bottom: 50px;
+        }
+
+        .left, .right, .center {
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .center {
+            background-color: #ccc;
+        }
+
+        .left {
+            width: 150px;
+            background-color: #409EFF;
+        }
+
+        .right {
+            width: 150px;
+            background-color: #ff2c39;
+        }
+
+        /* 表格布局 */
+        .table-container {
+            display: table;
+            width: 100%;
+        }
+
+        .table-container > .left, .table-container > .right, .table-container > .center {
+            display: table-cell;
+        }
+
+        /* 网格布局 */
+        .grid-container {
+            display: grid;
+            width: 100%;
+            grid-template-rows: 200px;
+            grid-template-columns: 150px auto 150px;
+        }
+
+        /* flex 布局 */
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-container .center {
+            flex: 1;
+        }
+
+        /* 定位布局 */
+        .position-container {
+            height: 200px;
+        }
+
+        .position-container > .left, .position-container > .right, .position-container > .center {
+            position: absolute;
+        }
+
+        .position-container > .left {
+            left: 0;
+        }
+
+        .position-container > .right {
+            right: 0;
+        }
+
+        .position-container > .center {
+            left: 150px;
+            right: 150px;
+        }
+
+        /* 浮动布局 */
+        .float-container > .left{
+            float: left;
+        }
+
+        .float-container > .right {
+            float: right;
+        }
+
+        .clearFix:after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+
+        .clearFix {
+            *zoom: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 表格布局 -->
+    <div class="wrap">
+        <header>Header</header>
+        <div class="main table-container">
+            <div class="left">Left</div>
+            <div class="center">Center 表格布局</div>
+            <div class="right">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+
+    <!-- 网格布局 -->
+    <div class="wrap">
+        <header>Header</header>
+        <div class="main grid-container">
+            <div class="left">Left</div>
+            <div class="center">Center 网格布局</div>
+            <div class="right">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+
+    <!-- flex 布局 -->
+    <div class="wrap">
+        <header>Header</header>
+        <div class="main flex-container">
+            <div class="left">Left</div>
+            <div class="center">Center flex 布局</div>
+            <div class="right">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+
+    <!-- 定位布局 -->
+    <div class="wrap">
+        <header>Header</header>
+        <div class="main position-container">
+            <div class="left">Left</div>
+            <div class="center">Center 定位布局</div>
+            <div class="right">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+
+    <!-- 浮动布局 -->
+    <div class="wrap">
+        <header>Header</header>
+        <div class="main float-container clearFix">
+            <div class="left">Left</div>
+            <div class="right">Right</div>
+            <div class="center">Center 浮动布局</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+</body>
+</html>

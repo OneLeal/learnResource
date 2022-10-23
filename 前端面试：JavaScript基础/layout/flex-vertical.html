@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>垂直布局</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+        
+        .wrap {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top, .bottom {
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            background-color: #409EFF;
+        }
+
+        .main {
+            text-align: center;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="top">Top</div>
+        <div class="main">Main</div>
+        <div class="bottom">Bottom</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <span>练习</span>
+    </body>
+    <script>
+        // 返回下列字符串所包含的子串的起始位置
+        var supStr = '苹果-香蕉-橘子-西瓜-苹果-山竹-苹果-柠檬-榴莲-木瓜-苹果-苹果-菠萝-苹果';
+        var Str1 = '苹果';
+
+        var a = supStr.indexOf(Str1)
+        var arr1 = []
+        while(a>-1){
+            arr1.push(a)
+            a = supStr.indexOf(Str1,a+1)
+        }
+
+        function findSubStrIndex (str) {}
+        
+        
+        // 数组降维
+        var arr = [['apple', 'pear'], 'watermelon', 'lemon', ['purple', ['moonlight', 'fealty'], 'abandon'], 'fundamental', ['desperate', ['excellent', 'natural', 'national',['social', 'cooperation'] , 'beauty']], 'turtle'];
+
+        // 从内往外递归
+        function flatArray1 (arr) {}
+
+        // 从外往内递归
+        function flatArray2 (arr) {}
+
+        function flatArray3 (arr) {
+            var hasArray = arr.some(item => item instanceof Array);
+            if (hasArray) {
+                return flatArray3([].concat(arr.flat()));
+            }
+            return arr;
+        }
+
+        // 利用 flat api
+        function flatArray4 (arr) {
+            return arr.flat(Infinity);
+        }
+
+
+        // 找出下列数组中的最大数
+        var numGroup = [1, 10, 5, 8, 7, 20, 9, 12, 4];
+        var numGroup1 = Math.max(...numGroup);
+
+        function findMaxNumber (arr) {
+            var number = arr[0];
+            for (let index = 1; index < arr.length; index++) {
+                const element = arr[index];
+                number < element && (number = element);
+            }
+            return number;
+        }
+       
+
+        // url 参数解析，返回一个对象
+        var url = 'www.imooc.com?name=QinYanFei&age=22&sex=0&phone=13083771680';
+        
+        function fetchData (url) {
+            var obj = {};
+            var temp;
+            var paramsGroup = url.split('?')[1];
+            var paramsObj = paramsGroup.split('&'); // ['name=QinYanFei', 'age=22']
+            for (var index in paramsObj) {
+                temp = paramsObj[index].split('=');
+                obj[temp[0]] = temp[1];
+            }
+            return obj;
+        }
+
+
+        // 字符串反转
+        var str = "You don't touch mother fucker think twice.";
+        var strReverse = str.split(' ').reverse().join(' ');
+
+        function stringReverse (str) {
+            var words = [], result = '', point = 0;
+            for (var i = 0; i < str.length; i++) {
+                if (str[i] === ' ') {
+                    words[words.length] = str.slice(point, i);
+                    point = i + 1;
+                } else if (i === str.length - 1) {
+                    words[words.length] = str.slice(point);
+                }
+            }
+
+            for (var j = words.length - 1; j > -1; j--) {
+                result +=( words[j] + ' ');
+            }
+
+            return result;
+        }
+
+
+        // 数组去重
+        var repeatArr = [2, 1, 1, 10, 12, 5, 7, 0, 9, 5, 5, 7, 12, 11, 9, 4, 3, 6, 9, 8, 14, 13, 0, 15];
+        
+        // 利用 es6 Set 类
+        function repeatArrFn1 (arr) {
+            return Array.from(new Set(arr));
+        }
+
+        // 利用对象键名的唯一性
+        function repeatArrFn2 (arr) {
+            var obj = {};
+            arr.forEach(num => !obj[num] && (obj[num] = 1));
+            return Object.keys(obj).map(num => +num);
+        }
+
+        // 一层 for 循环 + 数组 Api
+        function repeatArrFn3 (arr) {
+            var result = [], num;
+            // arr.forEach(num => !result.includes(num) && result.push(num));
+            arr.forEach(num => result.indexOf(num) === -1 && result.push(num));
+            return result;
+        }
+
+        // 利用数组下标去重
+        function repeatArrFn4 (arr) {
+            return arr.filter((num, index) => index === arr.indexOf(num));
+        }
+
+        // 双层循环
+        function repeatArrFn5 (arr) {
+            var result = [], flag;
+            for (var i = 0; i < arr.length; i++) {
+                flag = true;
+                for (var j = i + 1; j < arr.length; j++) {
+                    (arr[i] === arr[j]) && (flag = false);
+                }
+                flag && result.push(arr[i]);
+            }
+            return result;
+        }
+
+        // 利用 sort 排序后再处理
+        function repeatArrFn6 (arr) {
+            var temp = arr.sort();
+            var result = [temp[0]];
+            for (var i = 1; i < temp.length; i++) {
+                if (temp[i] !== temp[i - 1]) {
+                    result.push(temp[i]);
+                }
+            }
+            return result;
+        }
+   </script>
+</html>

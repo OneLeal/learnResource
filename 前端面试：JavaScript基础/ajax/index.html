@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>js 基础 第八课：Ajax、跨域、浏览器存储</h1>
+
+    <div id="btn-group" class="btn-group">
+        <button class="btn active" data-name="0">Ajax 知识点</button>
+        <button class="btn default" data-name="1">跨域知识点</button>
+        <button class="btn default" data-name="2">网络请求数据</button>
+        <button class="btn default" data-name="3">浏览器存储</button>
+    </div>
+
+    <div class="container">
+        <div class="wrap">
+            <div class="question">什么是 XMLHttpRequest 对象？</div>
+            <p class="description">XMLHttpRequest 对象用于在后台与服务器交换数据。</p>
+            <ul>
+                <li>在不重新加载页面的情况下更新网页</li>
+                <li>在页面已加载后从服务器请求数据</li>
+                <li>在页面已加载后从服务器接收数据</li>
+                <li>在后台向服务器发送数据</li>
+            </ul>
+        </div>
+
+        <div class="wrap">
+            <div class="question"> open() 方法的参数</div>
+            <ul>
+                <li>method：必需，规定请求的类型；</li>
+                <li>url：必需，规定请求的服务器上文件的url地址；</li>
+                <li>async：可选，用来规定请求的是异步方式还是同步方式，true为异步，false为同步，默认值是true；</li>
+                <li>userName：可选，如果服务器需要验证，此处指定用户名，如果未指定，当服务器需要验证时，会弹出验证窗口；</li>
+                <li>password：可选，验证信息中的密码部分，如果用户名为空，则此值将被忽略。</li>
+            </ul>
+        </div>
+
+        <div class="wrap">
+            <div class="question">关于 onreadystatechange 事件</div>
+            <p class="description">每当 readyState 属性改变时，就会调用该函数。</p>
+        </div>
+
+        <div class="wrap">
+            <div class="question">readyState 状态码</div>
+            <p class="description">存有 XMLHttpRequest 的状态</p>
+            <ul>
+                <li>0: 请求未初始化</li>
+                <li>1: 服务器连接已建立</li>
+                <li>2: 请求已接收</li>
+                <li>3: 请求处理中</li>
+                <li>4: 请求已完成，且响应已就绪</li>
+            </ul>
+        </div>
+
+        <div class="wrap">
+            <div class="question">status 状态码(HTTP状态码)</div>
+            <ul>
+                <li>1xx：服务器收到请求</li>
+                <li>2xx：成功处理请求</li>
+                <li>3xx：需要重定向</li>
+                <li>4xx：客户端错误</li>
+                <li>5xx：服务端错误</li>
+            </ul>
+        </div>
+
+        <div class="wrap">
+            <div class="question">常见的 HTTP 状态码</div>
+            <ul>
+                <li>301：永久重定向，浏览器跳转至新地址</li>
+                <li>302：临时重定向，浏览器跳转至新地址</li>
+                <li>304：资源未改变，自从上次请求后，请求的网页未修改过。</li>
+                <li>401：请求要求身份验证。</li>
+                <li>403：服务器拒绝请求。</li>
+                <li>404：服务器找不到请求的网页。</li>
+                <li>500：服务器遇到错误，无法完成请求。</li>
+                <li>502：服务器作为网关或代理，从上游服务器收到无效响应。 </li>
+                <li>503：服务器临时过载或宕机。</li>
+                <li>504：网关超时。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hidden container">
+        <p class="jsonp-css">同源策略：协议、域名、端口，三者必须一致；</p>
+        <p class="jsonp-css">图片加载（埋点）、css（cdn）、js（jsonp） 不受同源策略限制</p>
+        <p class="jsonp-css">跨域方式：jsonp、websocket、postMessage、cors(服务器设置 http header)</p>
+    </div>
+
+    <div id="http" class="hidden container">
+        <div class="section">
+            <p class="title">js 网络请求</p>
+
+            <div id="jsRes" class="data">
+                <p><span>description: </span><span id="description"></span></p>
+            </div>
+
+            <div class="btn-section">
+                <button data-name="1" class="btn btn-normal">发送请求</button>
+                <button data-name="4" class="btn btn-cancel">删除数据</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <p class="title">jQuery 网络请求</p>
+
+            <div id="jqRes" class="data">
+                <p><span>name: </span><span id="name"></span></p>
+                <p><span>age: </span><span id="age"></span></p>
+                <p><span>signature: </span><span id="signature"></span></p>
+                <p><span>like: </span><span id="like"></span></p>
+            </div>
+
+            <div class="btn-section">
+                <button data-name="2" class="btn btn-normal">发送请求</button>
+                <button data-name="5" class="btn btn-cancel">删除数据</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <p class="title">js 结合 Promise</p>
+
+            <div id="jsPromise" class="data">
+                <div class="music">
+                    <p>歌手：</p>
+                    <p id="singer"></p>
+                </div>
+
+                <div class="music">
+                    <p>歌曲：</p>
+                    <div id="songs"></div>
+                </div>
+            </div>
+
+            <div class="btn-section">
+                <button data-name="3" class="btn btn-normal">发送请求</button>
+                <button data-name="6" class="btn btn-cancel">删除数据</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden container">
+        <p class="storage">cookie: 用于和 server 通信，请求头里会携带有 cookie，大小 4KB，有时限；</p>
+        <p class="storage">localStorage: 最大可存 5M，永久性存储；</p>
+        <p class="storage">sessionStorage：最大可存 5M，信息会随着浏览器窗口的关闭而销毁；</p>
+    </div>
+</body>
+<script type="text/javascript" src="jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="fn.js"></script>
+<script type="text/javascript">
+    const elem = document.getElementById('btn-group');
+    const http = document.getElementById('http');
+    const container = document.getElementsByClassName('container');
+    const btn = document.getElementsByClassName('btn');
+    const containerLength = container.length;
+    const description = document.getElementById('description');
+    const name = document.getElementById('name');
+    const age = document.getElementById('age');
+    const signature = document.getElementById('signature');
+    const like = document.getElementById('like');
+    const songs = document.getElementById('songs');
+    const singers = document.getElementById('singer');
+    const temp = document.createDocumentFragment();
+
+    bindEvent('click', elem, 'button', function (e) {
+        const num = Number(e.target.getAttribute('data-name'));
+
+        for (let i = 0; i < containerLength; i++) {
+            container[i].className = 'hidden container';
+            btn[i].className = 'btn default';
+        }
+        btn[num].className = 'btn active';
+        container[num].className = 'show container';
+    });
+    bindEvent('click', http, 'button', function (e) {
+        const num = Number(e.target.getAttribute('data-name'));
+        switch (num) {
+            case 1: jsSendHttp(); break;
+            case 2: jQueryHttp(); break;
+            case 3: jsPromiseHttp(); break;
+            case 4: description.innerText = ''; break;
+            case 5:
+                age.innerText = '';
+                name.innerText = '';
+                like.innerText = '';
+                signature.innerText = '';
+                break;
+            case 6:
+                singers.innerText = '';
+                document.getElementById('box') && songs.removeChild(document.getElementById('box'));
+                break;
+            default: break;
+        }
+    });
+
+    // js 网络请求
+    function jsSendHttp() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', './json/words');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    if (description.innerText === '') {
+                        description.innerText = data.description;
+                    }
+                    console.log(data);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    // jQuery 网络请求
+    function jQueryHttp() {
+        $.ajax({
+            type: 'GET',
+            url: './json/person',
+            success: function (res) {
+                const data =  (JSON).parse(res);
+                setInnerText(name, data.data.name);
+                setInnerText(age, data.data.age);
+                setInnerText(signature, data.data.signature);
+                setInnerText(like, data.data.like);
+                console.log(data);
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        });
+    }
+
+    // js 结合 Promise
+    function jsPromiseHttp() {
+        sendRequest("GET", './json/music').then(data => {
+            const { list, singer } = data.data;
+            setInnerText(singers, singer);
+
+            if (!document.getElementById('box')) {
+                const box = document.createElement('div');
+                box.setAttribute('id', 'box');
+
+                for (let i = 0; i < list.length; i++) {
+                    const node = document.createElement('p');
+                    node.innerText = list[i];
+                    node.className = 'song';
+                    temp.appendChild(node);
+                }
+                box.appendChild(temp);
+                songs.appendChild(box);
+            }
+            console.log(data);
+        }).catch(err => {
+            console.warn('promise reject: ' + err);
+        });
+    }
+
+    // 跨域请求
+    window.callback = function (data) {
+        console.log(data);
+    };
+
+    window.callbackJQ = function(data) {
+        console.log(data);
+    };
+
+    // 跨域请求-jQuery
+    $.ajax({
+        url: 'http://localhost:8002/jsonp2.js',
+        dataType: 'jsonp',
+        jsonpCallback: 'callbackJQ'
+    });
+
+    const msg = { name: '浅芷初夏', college: '河南工业大学', hobby: '看抖音小姐姐' };
+    localStorage.setItem('msg', JSON.stringify(msg));
+    localStorage.setItem('userName', '浅色星河');
+    localStorage.setItem('password', '5201314');
+
+    createCookie('girlOne', '火线妹', 'min', 40);
+    createCookie('girlTwo', '咬人猫', 'hour', 2);
+</script>
+<script src="http://localhost:8002/jsonp1.js"></script>
+</html>

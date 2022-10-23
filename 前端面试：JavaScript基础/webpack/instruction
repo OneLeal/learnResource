@@ -1,0 +1,9 @@
+webpack 知识点
+
+1. ES6 Module 和 CommonJs 的区别：
+ES6 Module，静态引入，编译时引入，可静态分析，实现 tree-shaking （不打包定义但未使用的代码）
+CommonJs，动态引入，执行时引入
+
+2. production 的优点：自动压缩代码、vue/react 自动删除调试代码、启动 tree-shaking、scope-hosting
+
+webpack 高级配置：配置多入口文件，抽离 css 文件，分割代码块，

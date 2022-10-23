@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>杂例</title>
+</head>
+<body>
+    <h1>杂例</h1>
+</body>
+<script type="text/javascript" src="aboutArray.js"></script>
+<script type="text/javascript" src="isEqual.js"></script>
+<script type="text/javascript" src="aboutObject.js"></script>
+<script type="text/javascript" src="url.js"></script>
+<script type="text/javascript">
+    const obj1 = { a: 100, b: 200, c: { x: 1, y: 2 } };
+    const obj2 = { a: 100, b: 200, c: { x: 1, y: [0, { a: 2, b: 3 }] } };
+    const obj3 = [1, 2, 3];
+    const obj4 = { '0': 1, '1': 2, '2': 3 };
+    const obj5 = [1, 2, 3, []];
+
+    console.log(isEqual(obj1, obj2));
+    console.log(isEqual(obj3, obj4));
+    console.log(isEqual(obj3, obj5));
+    console.log(isEqual(obj4, obj5));
+
+    // 正则表达式
+    const post = /\d{6}/;
+
+    // 英文字母
+    const english = /^[a-zA-Z]+$/;
+
+    // 日起格式
+    const data = /^\d{4}-\d{1,2}-\d{1,2}$/;
+
+    // 用户名
+    const name = /^[a-zA-Z]\w{5,17}$/;
+
+    // 简单的 IP 地址
+    const ip = /\d+\.\d+\.\d+\.\d+/;
+
+    // 手写字符串 trim 保证浏览器兼容性
+    String.prototype.myselftrim = function () {
+        return this.replace(/^\s+/, '').replace(/\s+$/, '');
+    }
+</script>
+</html>

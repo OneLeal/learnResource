@@ -1,0 +1,32 @@
+.container {
+    margin-top: 20px;
+}
+
+.inp {
+    min-width: 300px;
+    outline: none;
+    border-radius: 4px;
+    border: 1px #333 solid;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 16px;
+    font-size: 14px;
+}
+
+.picture {
+    width: 200px;
+    border-radius: 4px;
+    border: 2px deepskyblue solid;
+    box-sizing: border-box;
+}
+
+.picture img {
+    cursor: pointer;
+    width: 100%;
+    vertical-align: bottom;
+    border-radius: 4px;
+}
+
+.drag {
+    font-weight: bold;
+}

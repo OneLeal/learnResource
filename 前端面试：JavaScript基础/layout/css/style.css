@@ -1,0 +1,65 @@
+html, body, p, div {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    width: 100px;
+    height: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #409EFF;
+}
+
+h1 {
+    text-align: center;
+}
+
+.mt-negative { margin-top: -20px; }
+.mb-negative { margin-bottom: -20px; }
+.ml-negative { margin-left: -20px; }
+.mr-negative { margin-right: -20px; }
+
+.bfc {
+    font-size: 18px;
+    font-weight: bold;
+    text-indent: 1rem;
+    margin: 20px 0;
+}
+
+.set-margin {
+    margin: 10px 0;
+    text-indent: 1rem;
+}
+
+.btn-group {
+    margin-left: 1rem;
+}
+
+.container {
+    margin-left: 1rem;
+    width: 300px;
+    padding: 20px;
+    background-color: #d8d8d8;
+    overflow: hidden;
+}
+
+.box {
+    text-align: center;
+    line-height: 100px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    border: 1px #000 solid;
+}
+
+.box-default {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    border: 1px #000 solid;
+}

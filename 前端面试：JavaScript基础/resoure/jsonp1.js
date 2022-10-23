@@ -1,0 +1,1 @@
+callback({ name: '浅色星河' });

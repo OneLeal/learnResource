@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运行环境</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>js 基础 第十课：运行环境</h1>
+    <input id="inp" class="inp" type="text">
+    <div class="container">
+        <div class="picture">
+            <img id="img" src="bg.jpg" alt="">
+        </div>
+        <div class="drag">拖拽图片</div>
+    </div>
+
+    <input id="inp1" class="inp" type="text">
+    <div class="container">
+        <div class="picture">
+            <img id="img1" src="girl.jpg" alt="">
+        </div>
+        <div class="drag">拖拽图片</div>
+    </div>
+</body>
+<script type="text/javascript" src="debThro.js"></script>
+<script type="text/javascript">
+    /*
+    * 加载的资源：html 代码；媒体文件（图片、音频、视频）；JavaScript、Css；
+    * 加载过程：
+    * 1. DNS 解析：域名 → IP 地址；
+    * 2. 浏览器根据 IP 地址向服务器发起 http 请求；
+    * 3. 服务器处理 http 请求，并将请求结果返回给浏览器；
+    * 4. 根据 html 生成 DOM 树；
+    * 5. 根据 css 生成 css 对象模型；
+    * 6. cssOM 和 DOM 树整合成 Render Tree；
+    * 7. 浏览器根据 Render Tree 渲染页面；
+    * 8. 渲染过程中遇到 script 标签，优先加载 js 代码，完成后再继续渲染；
+    * 9. 渲染完成；
+    *
+    * 性能优化：
+    * (原则上以时间换空间，减少 CPU 计算量和网络加载，多使用缓存、内存)
+    * (方向是加载快，渲染快)
+    * 1. 手写防抖（debounce）、节流（throttle）；
+    * 2. 减少网络加载耗时，减少 http 请求、CDN等等；
+    * 3. 压缩图片、代码，减少资源体积；
+    * 4. 图片懒加载；
+    * 5. 对 dom 查询进行缓存；
+    * 6. http 缓存；
+    * 7. 异步加载代码：script 标签中添加属性 defer/async
+    * 8. 减少 DOM 操作，避免 Reflow 和 Repaint
+    *
+    * window.onload 和 window.DomContentLoaded 的区别：
+    * 前者资源全部加载完才触发；后者 DOM 渲染完就触发
+    *
+    * 兼容性问题：
+    * 渐进增强
+    * 优雅降级
+    * 条件注释
+    * js 能力检测
+    * */
+
+    /*
+    * web 安全
+    * xss 跨站请求攻击：
+    * 替换特殊字符（转码），例："<" → &lt; ">" → &gt;
+    * csrf 跨站请求伪造
+    * 必要条件：用户要登录网站，要访问网站的接口
+    * 使用 post 请求，要进行验证（Token验证、Referer验证请求来源），隐藏令牌
+    * */
+
+    /*
+    * 1. 什么是 DOCTYPE 及作用
+    * 浏览器根据 DOCTYPE 声明的文档类型和 DTD（文档类型定义） 规范来判断文件是何种类型，
+    * 用何种协议解析，以及切换浏览器模式；其主要用途是文件的合法性验证。
+    *
+    * 常见的 DOCTYPE：<!DOCTYPE html>、H4 的严格模式和传统模式
+    *
+    * 2. Repaint 重绘 (无法避免)
+    * 浏览器根据元素确定下来的样式或属性将其绘制，使页面呈现的过程。
+    * Dom 和 css 改动均会触发 Repaint。
+    *
+    * 3. Reflow 回流
+    * 浏览器根据样式进行计算，根据计算结果把元素放到它该出现的位置；
+    * Dom 节点的删除、增加、修改，Dom 的位置改变，css 的改变，浏览器窗口 resize 都会触发 Reflow。
+    *
+    * 错误监控
+    * 1. 及时运行错误的捕获：try...catch、window.onerror；
+    * 2. 资源加载错误：object.onerror、performance.getEntries()、注册 error 事件并使用捕获模式
+    * */
+
+    const inp = document.getElementById('inp');
+    const drag = document.getElementById('img');
+
+    bindEvent('keyup', inp, debounceOrThrottle(function (e) {
+        console.log(e.target);
+        console.log(inp.value);
+    }));
+
+    // inp.addEventListener('keyup', debounceOrThrottle(function (e) {
+    //     console.log(e.target);
+    //     console.log(inp.value);
+    // }));
+
+    bindEvent('drag', drag, debounceOrThrottle(function(e) {
+        console.log(e.offsetX, e.offsetY);
+    }, 200, 0));
+
+    // drag.addEventListener('drag', debounceOrThrottle(function (e) {
+    //     console.log(e.offsetX, e.offsetY);
+    // }, 200, 0));
+
+
+    // 未封装
+    const inp1 = document.getElementById('inp1');
+    const img1 = document.getElementById('img1');
+
+    let timer1 = null;
+    let timer2 = null;
+
+    inp1.addEventListener('keyup', function () {
+        debou();
+    });
+
+    img1.addEventListener('drag', function (e) {
+        thro(e);
+    });
+
+    function debou(delay = 500) {
+        if (timer1) {
+            clearTimeout(timer1);
+        }
+
+        timer1 = setTimeout(() => {
+            console.log(inp1.value);
+            timer1 = null;
+        }, delay);
+    }
+
+    function thro(e, delay = 200) {
+        if (timer2) {
+            return;
+        }
+
+        timer2 = setTimeout(() => {
+            console.log(e.offsetX, e.offsetY);
+            timer2 = null;
+        }, delay);
+    }
+</script>
+</html>

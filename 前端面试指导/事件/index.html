@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <h1>事件处理</h1>
+    <div id="first" class="first">
+        <span>第一层</span>
+        <div id="second" class="second">
+            <span>第二层</span>
+            <div id="third" class="third">
+                <span>第三层</span>
+            </div>
+        </div>
+    </div>
+
+    <p id="btn" class="btn">myEvent</p>
+</body>
+<script src="./index.js"></script>
+<script>
+    // 手写一个通用的事件绑定方法
+    function bindEvent(type, elem, selector, fn) {
+        // 兼容三个参数
+        if (fn == null) {
+            fn = selector;
+            selector = null;
+        }
+
+        elem.addEventListener(type, e => {
+            if (selector) {
+                // 代理模式
+                if (e.target.matches(selector)) {
+                    fn.call(e.target, e);
+                }
+            } else {
+                // 普通绑定模式
+                fn.call(e.target, e);
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,32 @@
+.img-wrap {
+    width: 670px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.img-wrap img {
+    width: 100%;
+}
+
+.image-load {
+    margin: 30px 0 0 30px;
+}
+
+.image-load-inp {
+    /*border: 1px #333 solid;*/
+    margin-bottom: 20px;
+}
+
+.image-load-inp > input {
+    width: 500px;
+    border: 2px #999 solid;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    text-indent: 1rem;
+    color: #333;
+}
+

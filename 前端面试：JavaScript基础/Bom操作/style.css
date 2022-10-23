@@ -1,0 +1,31 @@
+.wrap {
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+.container {
+    border-bottom: 1px #333 dashed;
+    margin-top: 20px;
+}
+
+.container:first-of-type {
+    margin-top: 0;
+}
+
+.container li {
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.container li:hover {
+    color: deepskyblue;
+    font-weight: bold;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+}

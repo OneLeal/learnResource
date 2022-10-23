@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css 盒模型</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .father {
+            background-color: #ff2c39;
+            display: flow-root;
+        }
+
+        .son {
+            height: 100px;
+            margin-top: 10px;
+            background-color: #409EFF;
+        }
+
+        .box {
+            margin-top: 50px;
+            border: 1px solid #000;
+            background-color: lightpink;
+        }
+
+        .box div {
+            overflow: hidden;
+        }
+
+        .box p {
+            height: 20px;
+            line-height: 20px;
+            margin: 10px 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 边距重叠 -->
+    <div class="father">
+        <div class="son"></div>
+    </div>
+
+    <!-- BFC 的使用 -->
+    <div class="box">
+        <div><p>有美人兮</p></div>
+        <div><p>芒种</p></div>
+        <div><p>红昭愿</p></div>
+    </div>
+</body>
+<script type="text/javascript">
+    // IE 模型：宽度和高度 = content + padding + border；
+    // 标准模型：content 的实际宽高；
+
+    // box-sizing: content-box; (默认)
+    // box-sizing: border-box;
+
+    // js 对 dom 节点宽高的获取：
+    // dom.style.width/height （设置了内联样式才有效）
+    // dom.currentStyle.width/height （IE 支持：取渲染后的实际宽高）
+    // window.getComputedStyle(dom).width/height （Firefox 和 Chrome 支持：取渲染后的实际宽高）
+    // dom.getBoundingClientRect().width/height/left/top (dom 的实际位置)
+
+    /*
+    * BFC 块级格式化上下文
+    * 其垂直方向上的边距会发生重叠
+    * 其区域不与浮动元素的 box 重叠
+    * 是一个独立的容器 不影响外面的元素
+    * 浮动元素参与其高度的计算
+    *
+    * BFC 的触发：
+    * overflow: 不是 visible
+    * display: flow-root/table/table-cell/inline-block
+    * float 不是 none
+    * position: absolute/fixed
+    * */
+</script>
+</html>

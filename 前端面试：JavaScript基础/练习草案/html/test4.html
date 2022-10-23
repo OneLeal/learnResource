@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九宫格</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/nine-box.css">
+    <link rel="stylesheet" href="../css/loadImage.css">
+    <link rel="stylesheet" href="../css/list-layout.css">
+</head>
+<body>
+    <!-- 九宫格 -->
+    <div class="nine-box">
+        <!-- flex 布局 -->
+        <ul class="wrap flex-box">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+        </ul>
+
+        <!-- inline 布局 -->
+        <ul class="wrap inline-layout">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+        </ul>
+    </div>
+
+    <!-- 美女区 -->
+    <div class="image-load" id="image-load">
+        <div class="image-load-inp">
+            <input type="text" id="image-load-inp" placeholder="搜一搜你喜欢的美女">
+        </div>
+    </div>
+
+    <!-- 列表 -->
+    <div class="wrap-list">
+        <div class="list-container">
+            <p>歌曲列表</p>
+            <ul class="list-section" data-name="songs">
+                <li>
+                    <p>你曾是少年</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>浮白</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>光年之外</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>红昭愿</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+            </ul>
+            <button class="load-more">加载更多</button>
+        </div>
+
+        <div class="list-container">
+            <p>歌手列表</p>
+            <ul class="list-section" data-name="singer">
+                <li>
+                    <p>庄心妍</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>陈雪凝</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>赵方婧</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+
+                <li>
+                    <p>王梓钰</p>
+                    <button class="btn-del">删 除</button>
+                </li>
+            </ul>
+            <button class="load-more">加载更多</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+        const domImg = document.getElementById('image-load');
+        const inp = document.getElementById('image-load-inp');
+
+        afterSend('http://localhost:8000/json/picture.json');
+        bindEvent('keyup', inp, debounce((e) => {
+            console.log(e.keyCode);
+        }, 800));
+        bindEvent('drag', domImg, 'img', throttle((e) => {
+            console.log(e.target, e.offsetX, e.offsetY);
+        }));
+
+        class List {
+            constructor(dom) {
+                this.LOAD_NUM = 4;
+                this.elGroup = Array.from(document.querySelectorAll(dom));
+                this.elGroup.forEach(item => {
+                   item.addEventListener('click', (e) => {
+                       const root = this.findRoot(e.target);     // 先找到根元素
+                       let fatherNode = null;
+
+                       Array.from(root.children).forEach(item => {   // 再找到父节点
+                           if (item.className.indexOf('list-section') > -1) {
+                               fatherNode = item;
+                           }
+                       });
+
+                       if (e.target.className.indexOf('btn-del') > -1) {
+                           this.removeItem(e.target, fatherNode);
+                       } else if (e.target.className.indexOf('load-more') > -1) {
+                           this.loadMore(fatherNode);
+                       }
+                   });
+                });
+            }
+
+            removeItem(el, fatherNode) {
+                const deleteNode = this.findRemoveNode(el, fatherNode);
+                deleteNode && fatherNode.removeChild(deleteNode);
+            }
+
+            loadMore(fatherNode) {
+                const addFrag = document.createDocumentFragment();
+                const dataName = fatherNode.getAttribute('data-name');
+
+                for (let i = 0; i < this.LOAD_NUM; i++) {
+                    const nodeLi = document.createElement('li');
+                    const nodeBtn = document.createElement('button');
+                    const nodeP = document.createElement('p');
+
+                    nodeBtn.innerText = '删 除';
+                    nodeBtn.className = 'btn-del';
+                    nodeP.innerText = MOCK_MUSIC_LIST[dataName][i];  // 这个地方模拟一下 ajax
+
+                    nodeLi.appendChild(nodeP);
+                    nodeLi.appendChild(nodeBtn);
+                    addFrag.append(nodeLi);
+                }
+
+                fatherNode.appendChild(addFrag);
+            }
+
+            // 找到需要删除的元素
+            findRemoveNode(el, fatherNode) {
+                if (el.parentNode === fatherNode) {
+                    return el;
+                } else {
+                    return this.findRemoveNode(el.parentNode, fatherNode);
+                }
+            }
+
+            // 找到事件代理的节点
+            findRoot(el) {
+                const root = this.elGroup.find(item => el.parentNode === item);
+                if (root) {
+                    return root;
+                } else {
+                    return this.findRoot(el.parentNode);
+                }
+            }
+        }
+
+        new List('.list-container');
+
+        function sendHttp(url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            const data = JSON.parse(xhr.responseText);
+                            resolve(data);
+                        } else {
+                            reject('err');
+                        }
+                    }
+                };
+                xhr.send();
+            });
+        }
+
+        function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = document.createElement('img');
+
+                img.onload = function () {
+                    const node = document.createElement('div');
+                    node.className = 'img-wrap';
+                    img.className = 'img';
+                    node.appendChild(img);
+                    resolve({node, code: 200, msg: 'Success Load Image'});
+                };
+
+                img.onerror = function () {
+                    const err = new Error(`图片加载失败 ${url}`);
+                    reject(err);
+                };
+
+                img.src = url;
+            });
+        }
+
+        async function readyLoad(src) {
+            const data =  await loadImage(src);
+            try {
+                const { node, code, msg } = data;
+                if (code === 200) {
+                    console.log(msg);
+                    domImg.appendChild(node);
+                    console.log('图片加载成功！');
+                } else {
+                    throw new Error('Fail Load Image !');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function afterSend(url) {
+            const data = await sendHttp(url);
+            try {
+                const { images, code, msg } = data;
+                if (code === 200) {
+                    if (images) {
+                        images.forEach(item => {
+                            readyLoad(item);
+                            console.log(msg);
+                        });
+                    } else {
+                        console.warn('图片加载异常');
+                    }
+                } else {
+                    throw new Error('Fail Http Request !')
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function bindEvent(type, dom, selector, fn) {
+            if (fn == null) {
+                fn = selector;
+                selector = null;
+            }
+
+            dom.addEventListener(type, (e) => {
+                if (selector) {
+                    e.target.className === selector && fn.call(e.target, e);
+                } else {
+                    fn.call(e.target, e);
+                }
+            });
+        }
+
+        function debounce(fn, delay = 500) {
+            let timer = null;
+
+            return function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments);
+                    timer = null;
+                }, delay);
+            }
+        }
+
+        function throttle(fn, delay = 500) {
+            let timer = null;
+
+            return function () {
+                if (timer) {
+                    return;
+                }
+
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments);
+                    timer = null;
+                }, delay);
+            }
+        }
+
+        const MOCK_MUSIC_LIST = {
+            songs: ['麻雀', '去年夏天', '神度', '盛夏的果实'],
+            singer: ['李荣浩', '王大毛', '风小筝', '莫文蔚']
+        }
+    });
+</script>
+</html>

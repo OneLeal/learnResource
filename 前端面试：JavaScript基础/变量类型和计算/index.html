@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible">
+    <title>变量类型和计算</title>
+</head>
+<body>
+    <h1>js 基础 第一课:变量类型和计算</h1>
+</body>
+<script type="text/javascript" src="./deepClone.js"></script>
+<script type="text/javascript">
+    // typeof 能判断所有的值类型和函数及函数
+    const name = '浅芷初夏';
+    const age = 24;
+    const flag = true;
+    const symbol = Symbol('S');
+    const fn = function () {};
+    console.log(typeof name, typeof age, typeof flag, typeof symbol, typeof fn);
+
+    // 引用类型都是 object
+    console.log(typeof null, typeof [], typeof  {});
+
+    /*
+    * 显示转换：
+    * Number('') = 0, Number(undefined) = NaN, Number(null) = 0
+    * 注意：[] + {}  {} + [] true + true 1 + {} {} + 1
+    * */
+</script>
+</html>

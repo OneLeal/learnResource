@@ -1,0 +1,20 @@
+header, footer {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #666;
+}
+
+.wrap {
+    margin-bottom: 50px;
+}
+
+.clearFix:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.clearFix {
+    *zoom: 1;
+}

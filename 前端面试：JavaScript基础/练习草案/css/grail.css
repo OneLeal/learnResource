@@ -1,0 +1,35 @@
+.grail {
+
+}
+
+.grail .main {
+    padding: 0 150px;
+}
+
+.grail .center, .grail .left, .grail .right {
+    float: left;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+}
+
+.grail .left, .grail .right {
+    width: 150px;
+}
+
+.grail .center {
+    background-color: #ccc;
+    width: 100%;
+}
+
+.grail .left {
+    background-color: #409EFF;
+    margin-left: -100%;
+    position: relative;
+    right: 150px;
+}
+
+.grail .right {
+    background-color: #ff2c39;
+    margin-right: -150px;
+}

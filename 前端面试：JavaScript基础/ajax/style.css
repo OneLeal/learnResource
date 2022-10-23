@@ -1,0 +1,96 @@
+.wrap {
+    margin: 20px 0;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.description {
+    padding: 0;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #409eff;
+    font-size: 16px;
+}
+
+li {
+    padding: 5px 0;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+
+.active {
+    color: #fff;
+    background-color: #409eff;
+}
+
+.default {
+    color: #333;
+    background-color: #efefef;
+}
+
+.btn-section {
+    margin: 20px 0;
+}
+
+.btn-normal {
+    color: #fff;
+    background-color: #909399;
+}
+
+.btn-cancel {
+    color: #fff;
+    background-color: #E6A23C;
+}
+
+.title {
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.data {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+}
+
+.music {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.jsonp-css, .storage {
+    padding: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+    background-color: #f7f7f7;
+}

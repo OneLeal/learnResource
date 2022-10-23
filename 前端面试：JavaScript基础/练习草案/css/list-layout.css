@@ -1,0 +1,62 @@
+.wrap-list {
+    width: 700px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.list-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.list-container > p {
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+.list-container > ul {
+
+}
+
+.list-container > ul li {
+    width: 270px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    border-bottom: 1px #ccc dashed;
+    padding: 0 10px;
+}
+
+.list-container > ul li button.btn-del {
+    width: 60px;
+    height: 26px;
+    font-size: 12px;
+    line-height: 26px;
+    color: #fff;
+    background-color: #ff2c39;
+}
+
+.list-container > button.load-more, .list-container .btn-del {
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.list-container > button.load-more {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+    line-height: 35px;
+    background-color: #409EFF;
+    color: #fff;
+    margin-top: 20px;
+}

@@ -1,0 +1,26 @@
+.dice {
+    margin: 20px;
+    border: 1px #000 solid;
+    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: purple;
+}
+
+.circle:nth-of-type(2) {
+    align-self: center;
+}
+
+.circle:nth-of-type(3) {
+    align-self: flex-end;
+}

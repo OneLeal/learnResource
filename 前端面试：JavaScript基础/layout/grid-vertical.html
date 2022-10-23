@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网格垂直布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .wrap {
+            height: 100%;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 80px auto 80px;
+        }
+
+        .main {
+            height: 100%;
+            text-align: center;
+        }
+
+        .bottom, .top {
+            text-align: center;
+            background-color: #409EFF;
+            line-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="top">Top</div>
+        <div class="main">Main</div>
+        <div class="bottom">Bottom</div>
+    </div>
+</body>
+</html>

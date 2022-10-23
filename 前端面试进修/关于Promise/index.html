@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>关于 Promise</h1>
+  </body>
+  <script src="./js/index.js"></script>
+  <script>
+    const p1 = new MyPromise((resolve, reject) => {
+      // resolve(100);
+      // reject("something's wrong in p1");
+      setTimeout(() => resolve(200), 1000);
+    });
+
+    const p2 = p1.then((data) => {
+      console.log("p1 then: ", data);
+      return data + 1;
+    });
+
+    const p3 = p2.then((data) => {
+      console.log("p2 then: ", data);
+      throw new Error("something's wrong in p3");
+    });
+
+    const p4 = p3.catch((error) => console.warn("p3 catch: ", error));
+    const p5 = MyPromise.resolve("浅色星河").then((data) =>
+      console.log("p5 then: ", data)
+    );
+    const p6 = MyPromise.reject("something's wrong in p6").catch((error) =>
+      console.warn(error)
+    );
+
+    MyPromise.all([p1, p2])
+      .then((data) => console.log("MyPromise all: ", data))
+      .catch((error) => console.warn("all catch: ", error));
+
+    MyPromise.race([p1, p2])
+      .then((data) => console.log("MyPromise race: ", data))
+      .catch((error) => console.warn("race catch: ", error));
+  </script>
+</html>

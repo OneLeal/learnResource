@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.news {
+    width: 200px;
+    height: 400px;
+    background-color: #ccc;
+    position: relative;
+    margin-left: -100%;
+    right: 200px;
+}
+
+.page { padding: 0 200px; }
+
+.author {
+    width: 200px;
+    height: 400px;
+    background-color: #ccc;
+    margin-right: -200px;
+}
+
+.mid {
+    width: 100%;
+    background-color: yellowgreen;
+    height: 400px;
+}
+
+.mid, .author, .news {
+    float: left;
+}
+
+.clear {
+    *zoom: 1;
+}
+
+.clear::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+

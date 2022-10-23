@@ -1,0 +1,10 @@
+{
+  "message": "success",
+  "code": "200",
+  "data": {
+    "name": "浅色星河",
+    "age": 24,
+    "signature": "那女孩对我说",
+    "like": "周冬雨"
+  }
+}

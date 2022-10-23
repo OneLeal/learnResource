@@ -1,0 +1,55 @@
+.songs {
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+    border-bottom: 1px #ccc dashed;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.picture {
+    margin-top: 50px;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pic-container {
+    width: 395px;
+}
+
+.pic-container img {
+    width: 100%;
+}
+
+.ctx {
+    text-align: center;
+    color: deepskyblue;
+    font-size: 18px;
+}
+
+.ctx-wrap {
+    margin-top: 20px;
+    border: 1px purple solid;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ctx-wrap > div {
+    width: 245px;
+    background-color: #fdfdfd;
+}
+
+.ctx-wrap > div div {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.color-blue {
+    color: blueviolet;
+}
+
+.color-red {
+    color: #e5234a;
+}

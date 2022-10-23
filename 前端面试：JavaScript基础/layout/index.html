@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>布局和css</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dice.css">
+</head>
+<body>
+    <div class="wrap">
+        <h1>关于布局和 css</h1>
+
+        <div class="container">
+            <div class="box" id="box1">box1</div>
+            <div class="box">box2</div>
+        </div>
+
+        <div class="container">
+            <div class="box-default" id="box1-copy">box1</div>
+            <div class="box-default">box2</div>
+        </div>
+
+        <p class="set-margin">给 box1 的 margin 设置负值: -20px</p>
+
+        <div class="btn-group" id="btn-group">
+            <button>margin-top</button>
+            <button>margin-bottom</button>
+            <button>margin-left</button>
+            <button>margin-right</button>
+            <button>clear</button>
+        </div>
+
+        <p class="bfc">BFC：一块独立渲染区域，内部元素的渲染不会影响边界以外的元素，常用于清除浮动。</p>
+
+        <div class="dice">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    const btn = document.getElementById('btn-group');
+    const box1 = document.getElementById('box1');
+    const boxCopy = document.getElementById('box1-copy');
+    const BTN_CTX = ['margin-top', 'margin-bottom', 'margin-left', 'margin-right'];
+
+    bindEvent('click', btn, 'button', function (e) {
+        const ctx = e.target.innerText;
+        if (ctx === BTN_CTX[0]) {
+            box1.className = 'box mt-negative'
+        } else if (ctx === BTN_CTX[1]) {
+            boxCopy.className = 'box-default mb-negative'
+        } else if (ctx === BTN_CTX[2]) {
+            box1.className = 'box ml-negative'
+        } else if (ctx === BTN_CTX[3]) {
+            box1.className = 'box mr-negative'
+        } else {
+            box1.className = 'box';
+            boxCopy.className = 'box-default';
+        }
+    });
+
+    function bindEvent(type, elem, selector, fn) {
+        if (fn == null) {
+            fn = selector;
+            selector = null;
+        }
+
+        elem.addEventListener(type, e => {
+            if (selector) {
+                // 代理模式
+                if (e.target.matches(selector)) {
+                    fn.call(e.target, e);
+                }
+            } else {
+                // 普通绑定模式
+                fn.call(e.target, e);
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TCP/IP 协议、http 协议</h1>
+</body>
+<!-- JSONP 跨域 -->
+<!-- <script src="http://192.168.0.129:8001"></script> -->
+<!-- <script src="/cache.js"></script> -->
+<script>
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('GET', 'http://127.0.0.1:8001'); // 跨域请求 server2
+    // xhr.send();
+
+    // 预请求
+    fetch('http://192.168.0.129:8001', {
+        method: 'DELETE',
+        headers: { 'X-Test-Cors': 'myRequest' }
+    });
+</script>
+</html>

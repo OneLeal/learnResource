@@ -1,0 +1,140 @@
+/* flex 布局 */
+.flex .main {
+    display: flex;
+}
+
+.flex .center, .flex .left, .flex .right {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.flex .center {
+    flex: 1;
+    background-color: #ccc;
+}
+
+.flex .left {
+    width: 150px;
+    background-color: #409EFF;
+}
+
+.flex .right {
+    width: 150px;
+    background-color: #ff2c39;
+}
+
+/* 浮动布局 */
+.float .center {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    background-color: #ccc;
+}
+
+.float .left, .float .right {
+    width: 150px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.float .left {
+    float: left;
+    background-color: #409EFF;
+}
+
+.float .right {
+    float: right;
+    background-color: #ff2c39;
+}
+
+/* 定位布局 */
+.position .main {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+.position .center {
+    width: calc(100% - 300px);
+    margin: 0 auto;
+    background-color: #ccc;
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+}
+
+.position .left, .position .right {
+    position: absolute;
+    width: 150px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.position .left {
+    background-color: #409EFF;
+    left: 0;
+    top: 0;
+}
+
+.position .right {
+    background-color: #ff2c39;
+    top: 0;
+    right: 0;
+}
+
+/* 网格布局 */
+.grid .main {
+    display: grid;
+    text-align: center;
+    grid-template-rows: 200px;
+    grid-template-columns: 150px auto 150px;
+    width: 100%;
+}
+
+.grid .center, .grid .left, .grid .right {
+    line-height: 200px;
+}
+
+.grid .center {
+    background-color: #ccc;
+}
+
+.grid .left {
+    background-color: #409EFF;
+}
+
+.grid .right {
+    background-color: #ff2c39;
+}
+
+/* 表格布局 */
+.table .main {
+    width: 100%;
+    display: table;
+}
+
+.table .center, .table .left, .table .right {
+    display: table-cell;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.table .left, .table .right {
+    width: 150px;
+}
+
+.table .left {
+    background-color: #409EFF;
+}
+
+.table .right {
+    background-color: #ff2c39;
+}
+
+.table .center {
+    background-color: #ccc;
+}

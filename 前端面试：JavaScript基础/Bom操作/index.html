@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bom 操作</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>js 基础 第六课：js-bom-api</h1>
+    <h3>Browser Object Model</h3>
+
+    <div class="wrap">
+        <div class="container">
+            <p class="title">如何识别浏览器类型？</p>
+            <ul id="recognition">
+                <li>navigator.userAgent</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <p class="title">拆解 url 各个部分</p>
+            <ul id="url">
+                <li>location.href</li>
+                <li>location.protocol</li>
+                <li>location.pathname</li>
+                <li>location.search</li>
+                <li>location.hash</li>
+                <li>location.port</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <p class="title">浏览器的分辨率</p>
+            <ul id="screen">
+                <li>screen.width</li>
+                <li>screen.height</li>
+                <li>window.innerWidth</li>
+                <li>window.innerHeight</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <p class="title">浏览器前进和后退</p>
+            <ul>
+                <li>history.back()</li>
+                <li>history.forward()</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="bom.js"></script>
+</html>

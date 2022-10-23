@@ -1,0 +1,38 @@
+.double-fly {
+
+}
+
+.double-fly .main {
+
+}
+
+.double-fly .main .center {
+    width: 100%;
+}
+
+.double-fly .main .center div {
+    margin: 0 150px;
+    background-color: #ccc;
+}
+
+.double-fly .main .center, .double-fly .left, .double-fly .right {
+    float: left;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+}
+
+.double-fly .left, .double-fly .right {
+    width: 150px;
+}
+
+.double-fly .left {
+    margin-left: -100%;
+    background-color: #409EFF;
+}
+
+.double-fly .right {
+    margin-left: -150px;
+    background-color: #ff2c39;
+}
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>前端面试题</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/flex-nine-box.css">
+    <link rel="stylesheet" href="./css/table-nine-box.css">
+    <link rel="stylesheet" href="./css/inline-nine-box.css">
+    <link rel="stylesheet" href="./css/layout.css">
+</head>
+<body>
+    <div class="nine-box">
+        <div class="flex-wrap">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </div>
+
+        <div class="table-wrap">
+            <div class="table-row">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </div>
+
+            <div class="table-row">
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+
+            <div class="table-row">
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+            </div>
+        </div>
+
+        <div class="inline-wrap">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </div>
+    </div>
+
+    <div class="list-wrap">
+        <ul class="list list1">
+            <li>
+                <div>
+                    <span>第1行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第2行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第3行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第4行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第5行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+        </ul>
+        <ul class="list list1">
+            <li>
+                <div>
+                    <span>第1行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第2行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第3行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第4行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第5行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-wrap">
+        <ul id="list2" class="list list2">
+            <li>
+                <div>
+                    <span>第1行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第2行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第3行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第4行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第5行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+        </ul>
+        <ul id="list3" class="list list2">
+            <li>
+                <div>
+                    <span>第1行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第2行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第3行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第4行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <span>第5行内容。。。</span>
+                    <button class="btn-del">删 除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="./js/flat.js"></script>
+<script type="text/javascript" src="./js/oop.js"></script>
+<script type="text/javascript" src="./js/ObjectAPI.js"></script>
+<script type="text/javascript">
+    // 面试题 1
+    function Foo() {
+        getName = function () { console.log(1); };
+        return this;
+    }
+
+    Foo.getName = function () { console.log(2); };
+    Foo.prototype.getName = function () { console.log(3); };
+
+    var getName = function () { console.log(4); };
+    function getName () { console.log(5); }
+
+    Foo.getName();
+    getName();
+    Foo().getName();
+    getName();
+    new Foo.getName();
+    new Foo().getName();
+    new new Foo().getName();
+
+    // -------------------------------------------------------------
+
+    const test = ['a', 'b', 'c', [1, 2, 3, [4, 5], 6, 7, 8], 9, 10];
+    console.log(flat1(test));
+    console.log(flat2(test));
+    console.log(test.flat(Infinity)); // es6
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const list2 = document.getElementById('list2');
+        const list3 = document.getElementById('list3');
+        new List('.list1');
+        new List2(list2, 'btn-del');
+        new List2(list3, 'btn-del');
+    });
+
+    // ---------------------------------------------------------------
+</script>
+</html>

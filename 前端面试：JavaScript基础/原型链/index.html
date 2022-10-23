@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链</title>
+    <style>
+        * { margin: 0; padding: 0 }
+        h1 { margin: 20px; padding-bottom: 20px; }
+        p { font-size: 20px; font-weight: bold; margin: 10px; padding: 7px 0; }
+    </style>
+</head>
+<body>
+    <h1>js 基础 第二课:原型、原型链、继承</h1>
+
+    <p>不下雪的广东，不一样的天空，他们都一样有着彼此破碎的梦。</p>
+    <p>又是你的问候，带给我是感动，在我孤寂的时候。</p>
+    <p>走在大街的边缘，我坐在窗边你熟悉的咖啡店。</p>
+    <p>哽咽到喉，说着放你到自由，我已经到了幻想的尽头。</p>
+    <p>待空山新雨后放一叶小舟，载上无人问津的温柔，摆渡寻处去忘忧。</p>
+</body>
+<script type="text/javascript" src="../jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="extendJquery.js"></script>
+<script type="text/javascript" src="practice.js"></script>
+<script type="text/javascript">
+    // 声明一个父类
+    class People {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        say() {
+            console.log(`My name is ${this.name}, ${this.age} years old.`);
+        }
+    }
+
+    // 声明一个子类
+    class Student extends People {
+        constructor(name, age, college, grade) {
+            super(name, age);
+            this.college = college;
+            this.grade = grade;
+        }
+
+        info() {
+            console.log(`I study in ${this.college} university, ${this.grade} grade.`);
+        }
+    }
+
+    // 声明一个子类
+    class Teacher extends People {
+        constructor(name, age, college, major) {
+            super(name, age);
+            this.college = college;
+            this.major = major;
+        }
+
+        info() {
+            console.log(`I teach ${this.major} class in ${this.college} university.`);
+        }
+    }
+
+    let White = new Student('White', 20, '河南工业大学', 2);
+    let James = new Teacher('James', 28, '河南工业大学', 'C++');
+    White.say();
+    White.info();
+    James.say();
+    James.info();
+
+    /*
+     * new 运算符：
+     * 1. 一个新对象被创建，继承构造函数的原型；
+     * 2. 构造函数执行，且 this 指向这个新实例；
+     * 3. 若构造函数没有返回对象，则返回创建的新对象，有则取代；
+     */
+</script>
+</html>

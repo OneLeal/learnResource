@@ -1,0 +1,32 @@
+.trophy-main {
+    width: 100%;
+    height: 300px;
+    background-color: #ccc;
+}
+
+.trophy-left {
+    position: relative;
+    background-color: #409EFF;
+    margin-left: -100%;
+    right: 200px;
+}
+
+.trophy-right {
+    background-color: #ff2c39;
+    margin-right: -200px;
+}
+
+.trophy-container {
+    padding: 0 200px;
+}
+
+.trophy-main, .trophy-left, .trophy-right {
+    text-align: center;
+    line-height: 300px;
+    float: left;
+}
+
+.trophy-left, .trophy-right {
+    width: 200px;
+    height: 300px;
+}

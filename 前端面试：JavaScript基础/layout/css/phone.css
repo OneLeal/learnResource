@@ -1,0 +1,21 @@
+@media only screen and (max-width: 374px) {
+    html { font-size: 86px; color: blue; }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 413px){
+    html { font-size: 100px; }
+}
+
+@media only screen and (min-width: 414px) {
+    html { font-size: 110px; color: orange; }
+}
+
+body {
+    font-size: 0.16rem;
+}
+
+.box {
+    width: 1rem;
+    height: 1rem;
+    background-color: #ff2c39;
+}

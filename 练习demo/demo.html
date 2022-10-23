@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    demo
+</body>
+<script src="./demo.js"></script>
+<script src="./js/practice2.js"></script>
+<script src="./leetcode/index.js"></script>
+<script>
+    // 闭包累加器
+    function addFn () {
+        var num = 0;
+        return function () {
+            return ++num;
+        };
+    };
+
+    var btnAdd = addFn();
+
+    // definedProperty 的妙用
+    var b = 0;
+    Object.defineProperty(window, 'a', {
+        get: function () {
+            return ++b;
+        },
+    });
+</script>
+</html>

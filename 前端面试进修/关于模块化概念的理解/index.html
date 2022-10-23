@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>JS 模块化</h1>
+  </body>
+  <script src="./js/index.js"></script>
+  <script>
+    // 定义一个模块 fruitData
+    moduleTools.define("fruitData", [], function () {
+      const data = {
+        name: "百果园",
+        list: [
+          { label: "香 蕉", price: 5 },
+          { label: "苹 果", price: 3 },
+          { label: "葡 萄", price: 10 },
+        ],
+      };
+
+      return { data };
+    });
+
+    // 定义一个模块 tools
+    moduleTools.define("tools", [], function () {
+      function plus(a, b) {
+        return a + b;
+      }
+
+      function highestPrice(list, key) {
+        return Math.max(...list.map((item) => item[key]));
+      }
+
+      return { plus, highestPrice };
+    });
+
+    // 获取模块容器中的某个模块
+    const getModuleFruit = moduleTools.getModule("fruitData");
+    const getModuleTools = moduleTools.getModule("tools");
+    console.log("module fruit: ", getModuleFruit);
+    console.log("module tools: ", getModuleTools);
+
+    // 定义一个模块，依赖于其他模块
+    moduleTools.define(
+      "calcPrice",
+      ["fruitData", "tools"],
+      function (fruitData, tools) {
+        const list = fruitData.data.list;
+        const sum = tools.plus(list[0].price, list[1].price);
+        const highestPrice = tools.highestPrice(list, "price");
+        console.log("sum: ", sum);
+        console.log("highestPrice: ", highestPrice);
+      }
+    );
+  </script>
+</html>

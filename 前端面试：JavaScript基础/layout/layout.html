@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣杯布局和双飞翼布局</title>
+    <link rel="stylesheet" href="css/doubleFly.css">
+    <link rel="stylesheet" href="css/trophy.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .head, .foot {
+            height: 50px;
+            background-color: #666;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .clearFix:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .clearFix {
+            *zoom: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="trophy">
+        <header class="head">header</header>
+
+        <div class="trophy-container clearFix">
+            <div class="trophy-main">center</div>
+            <div class="trophy-left">left</div>
+            <div class="trophy-right">right</div>
+        </div>
+
+        <footer class="foot">footer</footer>
+    </div>
+
+    <div class="double-fly">
+        <header class="head">header</header>
+
+        <div class="clearFix">
+            <div class="double-fly-main">
+                <div class="double-fly-main-container">center</div>
+            </div>
+            <div class="double-fly-left">left</div>
+            <div class="double-fly-right">right</div>
+        </div>
+
+        <footer class="foot">footer</footer>
+    </div>
+</body>
+</html>

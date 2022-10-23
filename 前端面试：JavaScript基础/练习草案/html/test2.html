@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dom 操作</title>
+    <style>
+        .ctx {
+            font-size: 18px;
+            font-weight: bold;
+            color: #409EFF;
+        }
+    </style>
+</head>
+<body>
+    <p>我出生的地方叫做大田县</p>
+    <p>零零后的同学，你不会说方言</p>
+
+    <ul id="music-list">
+        <li>流行<button class="btn-del">删 除</button></li>
+        <li>摇滚<button class="btn-del">删 除</button></li>
+        <li>民谣<button class="btn-del">删 除</button></li>
+        <li>爵士<button class="btn-del">删 除</button></li>
+        <li>古典<button class="btn-del">删 除</button></li>
+    </ul>
+
+    <ul id="food-list">
+        <li>汉堡<button class="btn-del">删 除</button></li>
+        <li>薯条<button class="btn-del">删 除</button></li>
+        <li>可乐<button class="btn-del">删 除</button></li>
+        <li>披萨<button class="btn-del">删 除</button></li>
+        <li>牛排<button class="btn-del">删 除</button></li>
+    </ul>
+
+    <ul class="list">
+        <li>洗面奶<button class="btn-del">删 除</button></li>
+        <li>柔肤水<button class="btn-del">删 除</button></li>
+        <li>面霜<button class="btn-del">删 除</button></li>
+        <li>乳液<button class="btn-del">删 除</button></li>
+        <li>洁面乳<button class="btn-del">删 除</button></li>
+    </ul>
+
+    <ul class="list">
+        <li>空客-A320<button class="btn-del">删 除</button></li>
+        <li>波音-B737<button class="btn-del">删 除</button></li>
+        <li>中国商飞-C919<button class="btn-del">删 除</button></li>
+        <li>空客-A330<button class="btn-del">删 除</button></li>
+        <li>波音-787<button class="btn-del">删 除</button></li>
+    </ul>
+</body>
+<script type="text/javascript" src="../js/practice.js"></script>
+<script type="text/javascript" src="../js/oop.js"></script>
+<script type="text/javascript" src="../js/arrayPractice.js"></script>
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+        const groupDom = document.querySelectorAll('p');
+        groupDom[0].setAttribute('data-name', 'music');
+        groupDom[0].setAttribute('class', 'ctx');
+        groupDom[1].style.marginTop = '20px';
+        groupDom[1].style.color = '#ff2c39';
+
+        const listMusic = document.getElementById('music-list');
+        const foodMusic = document.getElementById('food-list');
+
+        // 单例模式
+        new List(listMusic, 'btn-del');
+        new List(foodMusic, 'btn-del');
+
+        // 集合模式
+        new ListGather('.list', 'btn-del');
+
+        // 数组拍平
+        var flat_arr1 = [[4, 5, 6, [7]], 2, 3, [0, 1, 2, [12, 19], 8, 16, ',']];
+        // console.log(flat1(flat_arr1));
+        // console.log(flat2(flat_arr1));
+        // console.log(flat3(flat_arr1));
+        // console.log(flatByReduce(flat_arr1));
+        // console.log(flat_arr1.flat(Infinity));
+
+        // 解析 url 参数
+        var url = 'www.imooc.com/index.html?page=1&user=浅色星河&learn=react';
+        console.log(getUrlParams(url));
+
+        // 数组去重
+        var unique_arr = [0, 0, 0, 1, 2, 2, 1, 3, 4, 5, 6, 4, 7, 8, 9, 9, 10, 11, 10, 10, 12, 12, 13, 14, 15];
+        // console.log(unique1(unique_arr));
+        // console.log(unique2(unique_arr));
+        // console.log(unique3(unique_arr));
+        // console.log(unique4(unique_arr));
+        // console.log(unique5(unique_arr));
+        // console.log(reduceUnique1(unique_arr));
+        // console.log([...new Set(unique_arr)]);
+
+        // reduce 实战运用
+        var reduce_objArr = [
+            { id: 1, name: '张杰', age: 34, sex: '1', city: '广东', star: '白羊' },
+            { id: 2, name: '周杰伦', age: 42, sex: '1', city: '香港', star: '水瓶' },
+            { id: 3, name: '李荣浩', age: 30, sex: '1', city: '安徽', star: '射手' },
+            { id: 4, name: '陈雪凝', age: 25, sex: '0', city: '福建', star: '摩羯' },
+            { id: 5, name: '庄心妍', age: 27, sex: '0', city: '广东', star: '狮子' },
+            { id: 6, name: '王梓萌', age: 25, sex: '0', city: '广东', star: '天蝎' },
+            { id: 7, name: '赵方婧', age: 26, sex: '0', city: '广西', star: '处女' },
+            { id: 9, name: '金歧玟', age: 29, sex: '0', city: '湖北', star: '双鱼' },
+            { id: 9, name: '毛不易', age: 27, sex: '1', city: '江苏', star: '白羊' },
+            { id: 10, name: '浅色星河', age: 24, sex: '1', city: '广西', star: '摩羯' },
+            { id: 10, name: '浅芷初夏', age: 24, sex: '1', city: '广西', star: '摩羯' },
+            { id: 12, name: '周冬雨', age: 27, sex: '0', city: '湖北', star: '处女' },
+        ];
+
+        // 去掉 id 重复的元素
+        var uniqueID = reduceUnique2(reduce_objArr, 'id');
+        console.log(uniqueID);
+
+        // 统计数组元素的重复次数
+        var calcRepeatArr = [1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8, 9, 9, 9, 9, 9, 9, 10];
+        console.log(calcRepeatNum(calcRepeatArr));
+
+        // 根据地区分类排布
+        var arrByCity = sortByType(reduce_objArr, 'city');
+        console.log(arrByCity);
+
+        // 根据星座分类排布
+        var arrByStar = sortByType(reduce_objArr, 'star');
+        console.log(arrByStar);
+
+        // 获取所有人的歌曲
+        var music = [
+            { name: '陈雪凝', songs: ['绿色', '你的酒馆对我打了烊', '回忆见'], listenerThreeDays: [1, 2, 3] },
+            { name: '音阙诗听', songs: ['有美人兮', '空山新雨后', '红昭愿'], listenerThreeDays: [4, 5, 6] },
+            { name: '庄心妍', songs: ['以后的以后', '走着走着就散了'], listenerThreeDays: [7, 8, 9] },
+            { name: '赵方婧', songs: ['谷雨', '芒种'], listenerThreeDays: [10, 11, 12] },
+        ];
+
+        var totalMusic = getAllByType(music, 'songs');
+        console.log(totalMusic);
+
+        // 统计近三天以上四个人歌曲的日活收听人数总和
+        var totalListener = getTotal(music, 'listenerThreeDays');
+        console.log('totalListener: ' + totalListener);
+
+        // 给各子项添加近三天日活收听人数的总计
+        function addListenersByThreeDays(arr, type, name) {
+            return arr.map(item => {
+                let listeners = 0;
+                if (item[type]) {
+                    listeners = item[type].reduce((sum, num) => {
+                        return sum + num;
+                    }, 0);
+                }
+                item[name] = listeners;
+                return item;
+            });
+        }
+
+        var newArrMusic = addListenersByThreeDays(music, 'listenerThreeDays', 'total');
+        console.log(newArrMusic);
+
+
+        // 找出近三天热度最高的歌手（判断条件：listenerThreeDays 的和值）
+
+        // 方法一：
+        function getListenerArr(arr, type) {
+            return arr.reduce((result, item) => {
+                if (item[type]) {
+                    let sum = item[type].reduce((total, i) => {
+                        return total + i;
+                    }, 0);
+
+                    result.push(sum);
+                }
+                return result;
+            }, []);
+        }
+
+        var listenerArr = getListenerArr(music, 'listenerThreeDays');
+        var hotSingerListener = getMaxValue(...listenerArr);
+        var hotSinger1 = newArrMusic.find(item => item.total === hotSingerListener);
+
+        // 方法二：
+        function getHotSinger(arr) {
+            let num = 0;
+            arr.forEach(item => {
+                item.total && item.total > num ? num = item.total : null;
+            });
+            return arr.find(item => item.total === num);
+        }
+
+        var hotSinger2 = getHotSinger(newArrMusic);
+
+        // 方法三：
+        function findHotSinger(arr, type) {
+            let hotSinger = 0;
+            arr.forEach(item => {
+                let listeners = 0;
+                if (item[type]) {
+                    listeners = item[type].reduce((sum, listener) => {
+                        return sum + listener;
+                        }, 0);
+                }
+                item.totalListener = listeners;
+                listeners > hotSinger ? (hotSinger = listeners) : null;
+            });
+            return arr.find(item => item.totalListener === hotSinger);
+        }
+
+        var hotSinger3 = findHotSinger(music, 'listenerThreeDays');
+        // console.log(hotSinger1, hotSinger2, hotSinger3, music);
+
+        /*
+        * 小结：
+        * 1. 方法一：
+        * 重复做了累加操作（addListenersByThreeDays 方法中也使用了 reduce）；
+        * 最后使用 find 方法时，要依靠新数组 newArrMusic；
+        *
+        * 2. 方法二：
+        * 避免了方法一的重复累加，灵活运用了新数组 newArrMusic；
+        *
+        * 3. 方法三：
+        * 合理使用双层循环，不依赖新数组 newArrMusic；
+        * 不仅没有重复 reduce 操作，并结合了 getMaxValue 方法的特点去获取最大值；
+        * 但是最终改变了源数据，music 里多了 totalListener 属性；
+        * */
+    });
+</script>
+</html>

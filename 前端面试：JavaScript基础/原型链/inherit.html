@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象与继承</title>
+</head>
+<body>
+    <h1>对象与继承</h1>
+</body>
+<script type="text/javascript">
+    function Father1() {
+        this.type = 'Father1';
+    }
+
+    function Father2(arr) {
+        this.arr = arr;
+        this.type = 'Father2';
+    }
+
+    function Son1() {
+        this.name = 'son1';
+        Father1.call(this);  // 构造函数继承（缺点：无法继承原型）
+    }
+
+    function Son2() {
+        this.name = 'son2';
+    }
+
+    Father1.prototype.info = function () {
+        console.log('父类1');
+    };
+
+    Father2.prototype.info = function () {
+        console.log('父类2');
+    };
+
+    Son2.prototype = new Father2([1, 2, 3]);  // 原型继承（缺点：共用一个父类实例）
+
+    var child1 = new Son1();
+    var child2 = new Son2();
+    var child3 = new Son2();
+
+    child2.arr.push(4);
+    console.log('child2: ', child2.arr);
+    console.log('child3: ', child3.arr);
+
+    // 组合继承
+    function Father3(age, msg) {
+        this.arr = [1 ,2, 3];
+        this.age = age;
+        this.msg = msg;
+        this.type = 'Father3';
+    }
+
+    Father3.prototype.info = function () {
+        console.log('父类3');
+    };
+
+    function Son3(sex, age, msg, tag) {
+        this.name = 'child3';
+        this.sex = sex;
+        this.tag = tag;
+        Father3.call(this, age, msg);
+    }
+
+    // Son3.prototype = Father3.prototype;
+    // 优化  Son3.prototype = Father3.prototype 的写法
+    Son3.prototype = Object.create(Father3.prototype);
+    Son3.prototype.constructor = Son3;
+
+    var child4 = new Son3('男', 24, { nick: '浅色星河', job: '前端工程师' }, ['study', 'music', 'programming']);
+    var child5 = new Son3('女', 22, { nick: '浅芷初夏', job: '原画创作' }, ['movie', 'reading']);
+    var father3 = new Father3(50, 505);
+    child4.arr.push(4);
+    child5.arr.shift();
+
+    console.log('child4: ', child4.arr);
+    console.log('child5: ', child5.arr);
+    console.log(child4.constructor === Son3, child4 instanceof Son3, child4 instanceof Father3);
+    console.log(child5.constructor === Son3, child5 instanceof Son3, child5 instanceof Father3);
+</script>
+</html>

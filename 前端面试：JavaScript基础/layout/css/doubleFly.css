@@ -1,0 +1,34 @@
+.double-fly {
+    margin-top: 100px;
+}
+
+.double-fly-main, .double-fly-left, .double-fly-right {
+    float: left;
+    text-align: center;
+    line-height: 300px;
+}
+
+.double-fly-left, .double-fly-right {
+    width: 200px;
+    height: 300px;
+}
+
+.double-fly-main {
+    width: 100%;
+    height: 300px;
+    background-color: #ccc;
+}
+
+.double-fly-main-container {
+    margin: 0 200px;
+}
+
+.double-fly-left {
+    margin-left: -100%;
+    background-color: greenyellow;
+}
+
+.double-fly-right {
+    margin-left: -200px;
+    background-color: deepskyblue;
+}

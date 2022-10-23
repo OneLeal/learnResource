@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* .wrap {
+    display: flex;
+}
+
+.center {
+    flex: 1;
+    height: 400px;
+    background-color: #ccc;
+} */
+
+.left, .right {
+    width: 200px;
+    height: 400px;
+    background-color: #999;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.center {
+    height: 400px;
+    width: calc(100% - 400px);
+    background-color: orange;
+    display: inline-block;
+}
+
+.clear-float::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.clear-float {
+    *zoom: 1;
+}

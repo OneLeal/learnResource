@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>demo-草案</h1>
+</body>
+<script type="text/javascript">
+    function SuperType (name, age, arr) {
+        this.name = name || null;
+        this.age = age || null;
+        this.arr = arr;
+    }
+    SuperType.prototype.walk = function () {
+        console.log(this.name + ' is walking.');
+    }
+
+    function SubType (name, age, arr, info = 'info') {
+        this.info = info
+        SuperType.call(this, name, age, arr);
+    }
+    SubType.prototype = Object.create(SuperType.prototype);
+    SubType.prototype.constructor = SubType;
+    console.time('o1');
+    const o1 = new SubType('boy', 20, [1, 2]);
+    const o2 = new SubType('girl', 18, [1, 2]);
+    const o3 = new SuperType('woman', '19', []);
+    console.timeEnd('o1');
+</script>
+</html>

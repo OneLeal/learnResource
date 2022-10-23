@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>宏任务/微任务</h1>
+  </body>
+  <script src="./index.js"></script>
+  <script>
+    /**
+     * async/await 相关：
+     * 1. async 方法执行相当于一个 Promise 对象；
+     * 2. await 相当于 Promise 的回调 then；
+     * 3. await 后是一个 Promise 对象(不是则自动封装)；
+     * 4. 其本质还是 Promise；
+     */
+
+    async function fn1() {
+      console.log(1);
+      await 100;
+      console.log(2);
+    }
+
+    async function fn2() {
+      console.log(3);
+      return 100;
+    }
+
+    console.log(4);
+    console.log(x);
+    fn1();
+    console.log(5);
+    var x = fn2();
+    console.log(6);
+    console.log(x);
+  </script>
+</html>

@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.first {
+    margin: 20px;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.second {
+    background-color: #ccc;
+    padding: 10px;
+    color: #333;
+}
+
+.third {
+    background-color: #999;
+    padding: 10px;
+    color: #333;
+}
+
+.btn {
+    background-color: #ff2c39;
+    color: #fff;
+    width: 80px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 20px;
+}

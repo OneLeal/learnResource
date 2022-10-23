@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <span>练习</span>
+    </body>
+    <script src="./leetcode/array/index.js"></script>
+    <script>
+        // 返回下列字符串所包含的子串的起始位置
+        var supStr = '苹果-香蕉-橘子-西瓜-苹果-山竹-苹果-柠檬-榴莲-木瓜-苹果-苹果-菠萝-苹果';
+        var subStr = '苹果';
+        var findSubstrIndex = function (str, substr) {
+            var result = [], len = substr.length;
+            var start = str.indexOf(substr);
+            while (start > -1) {
+                result.push(start);
+                start = str.indexOf(substr, start + len);
+            }
+            return result;
+        };
+        console.log('findSubstrIndex: ', findSubstrIndex(supStr, subStr));
+        
+        // 数组降维
+        var arr = [['apple', 'pear'], 'watermelon', 'lemon', ['purple', ['moonlight', 'fealty'], 'abandon'], 'fundamental', ['desperate', ['excellent', 'natural', 'national',['social', 'cooperation'] , 'beauty']], 'turtle'];
+        var arrayFlat1 = function (arr) {
+            var isHasArray = arr.some(item => Array.isArray(item));
+            if (isHasArray) {
+                return arrayFlat1([].concat(arr.flat()));
+            }
+            return arr;
+        };
+        var arrayFlat2 = function (arr) {
+            var isHasArray = arr.some(item => Array.isArray(item));
+            var temp = [];
+            if (isHasArray) {
+                arr.forEach(item => item instanceof Array ? temp.push(...item) : temp.push(item));
+                return arrayFlat2(temp);
+            }
+            return arr;
+        };
+        var arrayFlat3 = function (arr) {
+            var result = [];
+            arr.forEach(item => {
+                if (item instanceof Array) {
+                    result.push(...arrayFlat3(item));
+                } else {
+                    result.push(item);
+                }
+            });
+            return result;
+        };
+        console.log('arrayFlat1: ', arrayFlat1(arr));
+        console.log('arrayFlat2: ', arrayFlat2(arr));
+        console.log('arrayFlat3: ', arrayFlat3(arr));
+
+        // 找出下列数组中的最大数
+        var numGroup = [1, 10, 5, 8, 7, 20, 9, 12, 4];
+        var findMaxNum = function (arr = []) {
+            var temp = arr.shift();
+            arr.forEach(num => (num > temp) && (temp = num));
+            return temp;
+        };
+        console.log('findMaxNum: ', findMaxNum(numGroup));
+
+        // url 参数解析，返回一个对象
+        var url = 'www.imooc.com?name=QinYanFei&age=22&sex=0&phone=13083771680';
+        var fetchParamsOfUrl = function (url) {
+            var data = {};
+            var keyValueGroup = url.split('?')[1].split('&');
+            var temp;
+            keyValueGroup.forEach(item => {
+                temp = item.split('=');
+                data[temp[0]] = temp[1];
+            });
+            return data;
+        };
+        console.log('fetchParamsOfUrl: ', fetchParamsOfUrl(url));
+
+        // 字符串反转
+        var str = "You don't touch mother fucker think twice.";
+        var strReverse1 = function (str) { 
+            return str.split(' ').reverse().join(' '); 
+        };
+        var strReverse2 = function (str) {
+            var index = 0, words = [], result = '', len = str.length;
+            for (var i = 0; i < len; i++) {
+                if (str[i] === ' ') {
+                    words[words.length] = str.slice(index, i);
+                    index = i + 1;
+                }
+                i === len - 1 && (words[words.length] = str.slice(index, len));
+            }
+            for (var j = words.length - 1; j > -1; j--) {
+                if (j === 0) {
+                    result += words[j];
+                } else {
+                    result += (words[j] + ' ');
+                }
+            }
+            return result;
+        };
+        console.log('strReverse1: ', strReverse1(str));
+        console.log('strReverse2: ', strReverse2(str));
+
+        // 数组去重
+        var repeatArr = [2, 1, 1, 10, 12, 5, 7, 0, 9, 5, 5, 7, 12, 11, 9, 4, 3, 6, 9, 8, 14, 13, 0, 15];
+        var uniqueArray1 = function (arr) {
+            var result = [];
+            arr.forEach(item => {
+                if (!result.includes(item)) {
+                    result.push(item);
+                }
+            });
+            return result;
+        };
+        var uniqueArray2 = function (arr) {
+            return arr.filter((item, index) => index === arr.indexOf(item));
+        };
+        var uniqueArray3 = function (arr) {
+            return [...new Set(arr)];
+        };
+        var uniqueArray4 = function (arr) {
+            var obj = {}, result = [];
+            arr.forEach(item => {
+                if (!obj[item]) {
+                    obj[item] = 1;
+                    result.push(item);
+                }
+            });
+            return result;
+        };
+        var uniqueArray5 = function (arr) {
+            var result = [], flag;
+            for (var i = 0; i < arr.length; i++) {
+                flag = true;
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[j] === arr[i]) {
+                        flag = false;
+                    }
+                }
+                flag && result.push(arr[i]);
+            }
+            return result;
+        };
+        var uniqueArray6 = function (arr) {
+            var handleArr = arr.sort();
+            var result = [];
+            for (var i = 0; i < handleArr.length; i++) {
+                if (arr[i] !== arr[i + 1]) {
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+        };
+        console.log('uniqueArray1: ', uniqueArray1(repeatArr));
+        console.log('uniqueArray2: ', uniqueArray2(repeatArr));
+        console.log('uniqueArray3: ', uniqueArray3(repeatArr));
+        console.log('uniqueArray4: ', uniqueArray4(repeatArr));
+        console.log('uniqueArray5: ', uniqueArray5(repeatArr));
+        console.log('uniqueArray6: ', uniqueArray6(repeatArr));
+
+        // 深拷贝
+        var data = { 
+            name: '浅色星河',
+            age: 25,
+            music: ['谷雨', '惊蛰', '芒种'],
+            message: {
+                label: 'FE',
+                title: 'engineer',
+                rank: 3
+            }
+        };
+        var deepClone = function (data) {
+            if (typeof data !== 'object' || data == null || data instanceof Function) {
+                return data;
+            }
+
+            var temp;
+            if (data instanceof Object) {
+                temp = {};
+            }
+
+            if (data instanceof Array) {
+                temp = [];
+            }
+
+            for (var key in data) {
+                temp[key] = deepClone(data[key]);
+            }
+
+            return temp;
+        };
+        var cloneData1 = deepClone(data);
+        var cloneData2 = Object.assign(data);
+        data.name = '小鲨鱼';
+        data.music[0] = '春分';
+        data.message.label = 'BP';
+        console.log('cloneData1: ', cloneData1);
+        console.log('cloneData2: ', cloneData2);
+
+        // 取深度对象中的某个属性
+        var deepObj = { 
+            country: {
+                China: {
+                    province: {
+                        Guangxi: {
+                            Guilin: '桂林',
+                            Nanning: '南宁',
+                            Liuzhou: '柳州'
+                        },
+                        Henan: {
+                            Zhengzhou: '郑州',
+                            Luoyang: '洛阳'
+                        }
+                    },
+                    city: {
+                        Shanghai: '上海',
+                        Chongqing: '重庆'
+                    }
+                },
+                Japan: {
+                    Honshu: '本州岛',
+                    Kobe: '神户'
+                }
+            } 
+        };
+        var fetchProp1 = function (data, prop) {
+            if (!(data.toString() === '[object Object]' && typeof prop === 'string')) {
+                return 0;
+            }
+
+            if (data.hasOwnProperty(prop)) {
+                return data[prop];
+            }
+
+            var temp;
+            for (var key in data) {
+                if (data[key] instanceof Object) {
+                    temp = fetchProp1(data[key], prop);
+                    if (temp != null) {
+                        break;
+                    }
+                }
+            }
+            return temp;
+        };
+        var fetchProp2 = function (data, prop) {
+            if (!(data.toString() === '[object Object]' && typeof prop === 'string')) {
+                return 0;
+            }
+
+            var result;
+            var range = function (data, prop) {
+                if (Object.keys(data).includes(prop)) {
+                    result = data[prop];
+                } else {
+                    for (var key in data) {
+                        data[key] instanceof Object && range(data[key], prop);
+                    }
+                }
+            }
+            range(data, prop);
+            return result;
+        };
+        console.log('fetchProp: ', fetchProp1(deepObj, 'Nanning'));
+        console.log('fetchProp: ', fetchProp1(deepObj, 'city'));
+        console.log('fetchProp: ', fetchProp1(deepObj, 'Guilin'));
+        console.log('fetchProp: ', fetchProp1(deepObj, 'Chongqing'));
+        console.log('fetchProp: ', fetchProp1(deepObj, 'Kobe'));
+
+        console.log('fetchProp: ', fetchProp2(deepObj, 'Luoyang'));
+        console.log('fetchProp: ', fetchProp2(deepObj, 'Shanghai'));
+        console.log('fetchProp: ', fetchProp2(deepObj, 'Honshu'));
+        console.log('fetchProp: ', fetchProp2(deepObj, 'Henan'));
+        console.log('fetchProp: ', fetchProp2(deepObj, 'Japan'));
+
+        /*
+            请完成函数：
+            输入两个字符串 s 和 t，判断 t 是否可以通过删除若干个字符得到 s。
+            例：'abcsfs' 可删除部分字符得到 'bcss'
+        */
+        var isInsideStr = function (s, t) {
+            var temp = '', index = 0;
+            for (var i = 0; i < s.length; i++) {
+                for (j = index; j < t.length; j++) {
+                    if (s[i] === t[j]) {
+                        temp += t[j];
+                        index = j + 1;
+                        break;
+                    }
+                }
+            }
+            return temp === s;
+        };
+
+        console.log(isInsideStr('bcss', 'abcsfs')); // true
+        console.log(isInsideStr('bcss', 'accsbcssf')); // true
+        console.log(isInsideStr('bcss', 'asbcsbcf')); // false
+        console.log(isInsideStr('bcss', 'babsfcs')); // false
+        console.log(isInsideStr('bcss', 'bscasbcsf')); // true
+        console.log(isInsideStr('bsssc', 'bssckik')); // false
+        console.log(isInsideStr('bsssc', 'csbssbsc')); // true
+        console.log(isInsideStr('ssbsssc', 'scssbsbscs')); // false
+        console.log(isInsideStr('ssbscsscccc', 'cscssbsbscscsccscc')); // true
+
+        /*
+            请完成函数：
+            两个长度为 n 的字符串之间的距离定义为这两个字符串对应位置上不同字符的个数；
+            例如：'babc' 和 'abba' 的距离是 3
+            输入参数为 m 个长度为 n 的字符串
+            生成一个与给定的这 m 个字符串的距离之和最小，长度为 n 的字符串并输出。
+        */
+        var strArr = [
+            'purple',
+            'people',
+            'person',
+            'proper',
+            'period'
+        ];
+        var englishWords = [
+            'sunshine',
+            'umbrella',
+            'normally',
+            'gorgeous',
+            'currency',
+            'accuracy',
+            'adequacy'
+        ];
+    
+        var calcMinDistanceString = function (strArray) {
+            if (!Array.isArray(strArray)) return '';
+            var maxString = function (data) {
+                var prop, num;
+                for (var key in data) {
+                    if (!prop) {
+                        prop = key;
+                        num = data[prop];
+                    } else {
+                        data[key] > num && (prop = key, num = data[key]);
+                    }
+                }
+                return prop;
+            };
+            var len = strArray[0].length, obj = {}, temp, str = '';
+            for (var i = 0; i < len; i++) {
+                obj = {}, temp = null;
+                strArray.forEach(item => {
+                    temp = item[i];
+                    if (!obj[temp]) {
+                        obj[temp] = 1;
+                    } else obj[temp]++;
+                });
+                str += maxString(obj);
+            }
+            return str;
+        };
+        console.log('calcMinDistanceString: ', calcMinDistanceString(strArr));
+        console.log('calcMinDistanceString: ', calcMinDistanceString(englishWords));
+
+        /*
+            请完成函数：
+            已知 C/H/O/N 4种原子的质量分别为 12/1/16/14，输入参数为分子式，请计算分子质量。
+            例：输入 H2O，返回 18；输入 CO2，返回 44
+            输入异常数据返回 0
+
+            附: 尝试加入含小写字母的其他元素(如：Ca、Cu、Cl、Fe)
+        */
+        var calcMolecularWeight = function (str) {
+            var mapElementList = {
+                C: [12, 0],
+                N: [14, 0],
+                H: [1, 0],
+                O: [16, 0]
+            };
+
+            if (!str || typeof str !== 'string') return 0;
+
+            var element, num, result = 0;
+            for (var i = 0; i < str.length; i++) {
+                if (i === 0) {
+                    element = str[i];
+                    num = 1;
+                } else {
+                    if (isNaN(+str[i])) {
+                        mapElementList[element][1] += num;
+                        element = str[i];
+                        num = 1;
+                    } else {
+                        num = +str[i];
+                    }
+                }
+
+                if (i === str.length - 1) {
+                    mapElementList[element][1] += num;
+                }
+            }
+
+            for (var key in mapElementList) {
+                result += (mapElementList[key][0] * mapElementList[key][1]);
+            }
+            return result;
+        };
+
+        console.log('CO2: ', calcMolecularWeight('CO2'));
+        console.log('NO2: ', calcMolecularWeight('NO2'));
+        console.log('H2O: ', calcMolecularWeight('H2O'));
+        console.log('CH4: ', calcMolecularWeight('CH4'));
+
+        var calcMolecularWeightExtend = function (str) {
+            var mapElementList = {
+                C: [12, 0],
+                N: [14, 0],
+                H: [1, 0],
+                O: [16, 0],
+                S: [32, 0],
+                K: [39, 0],
+                Ca: [40, 0],
+                Na: [23, 0],
+                Mg: [24, 0],
+                Cu: [64, 0],
+                Fe: [56, 0],
+                Cl: [35, 0]
+            };
+
+            if (!str || typeof str !== 'string') return 0;
+
+            var element, num, result = 0;
+            var getElement = function (str, i) {
+                var current = str[i], next = str[i + 1], pat = /[a-z]/;
+                if (next && pat.test(next)) {
+                    return current + next;
+                }
+                return current;
+            };
+            for (var i = 0; i < str.length; i++) {
+                if (i === 0) {
+                    element = getElement(str, i);
+                    element.length > 1 && ++i;
+                    num = 1;
+                } else {
+                    if (isNaN(+str[i])) {
+                        mapElementList[element][1] += num;
+                        element = getElement(str, i);
+                        element.length > 1 && ++i;
+                        num = 1;
+                    } else {
+                        num = +str[i];
+                    }
+                }
+
+                if (i === str.length - 1) {
+                    mapElementList[element][1] += num;
+                }
+            }
+
+            for (var key in mapElementList) {
+                result += (mapElementList[key][0] * mapElementList[key][1]);
+            }
+            return result;
+        }
+
+        console.log('CO2: ', calcMolecularWeightExtend('CO2'));
+        console.log('NO2: ', calcMolecularWeightExtend('NO2'));
+        console.log('H2O: ', calcMolecularWeightExtend('H2O'));
+        console.log('CH4: ', calcMolecularWeightExtend('CH4'));
+        console.log('CaCO3: ', calcMolecularWeightExtend('CaCO3'));
+        console.log('Na2SO4: ', calcMolecularWeightExtend('Na2SO4'));
+        console.log('KCl: ', calcMolecularWeightExtend('KCl'));
+        console.log('CuO2: ', calcMolecularWeightExtend('CuO2'));
+
+        /*
+        * LeetCode：
+        * 题号：93
+        * 标题：复原IP地址
+        * 题目：有效的 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），
+        * 整数之间用 '.' 分隔。
+        *
+        * 例如："0.1.2.201" 和 "192.168.1.1" 是 有效的 IP 地址，
+        * 但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效的 IP 地址。
+        *
+        * 示例：
+        * 输入：s = "25525511135"
+        * 输出：["255.255.11.135","255.255.111.35"]
+        *
+        * 输入：s = "1111"
+        * 输出：["1.1.1.1"]
+        *
+        * */
+        var restoreIpAddresses = function (s) {
+            var result = [];
+            var findComb = function (target, subString) {
+                if (subString.length < 13) {
+                    if (target.length === 4 && target.join('') === s) {
+                        result.push(target.join('.'));
+                    } else {
+                        for (var i = 0, len = Math.min(3, subString.length); i < len; i++) {
+                            var temp = subString.slice(0, i + 1);
+                            if (+temp < 256) {
+                                !(temp.length > 1 && temp[0] === '0') && findComb(target.concat(temp), subString.slice(i + 1));
+                            }
+                        }
+                    }
+                }
+            };
+            findComb([], s);
+            return result;
+        };
+        console.log('restoreIpAddresses: ', restoreIpAddresses('25525511135'));
+        console.log('restoreIpAddresses: ', restoreIpAddresses('1111'));
+
+        /*
+        * 1. 有 4 支足球队进行单循环赛
+        * 1.1 列出所有比赛场次的上场方；
+        * 1.2 计算所有冠亚军出现的情况有多少种？
+        *
+        * 2. 由 0、1、2、3、4、5 可以组合成多少个没有重复数字的五位奇数？
+        *
+        * 3. 旅行社有豪华游 5 种，普通游 4 种，某公司欲从中选择 4 种，
+        * 其中至少有豪华游和普通游各一种的选择有多少种？
+        * */
+        var team = ['甲', '乙', '丙', '丁'];
+        var football = function (team, type = 0) {
+            var result = [];
+            var findComb = function (target, team) {
+                if (target.length === 2) {
+                    var flag = result.some(item => target.every(footballTeam => item.includes(footballTeam)));
+                    (!flag || type) && result.push(target);
+                } else {
+                    team.forEach(item => {
+                        findComb(target.concat(item), team.filter(filterItem => filterItem !== item));
+                    });
+                }
+            };
+            findComb([], team);
+            return result;
+        };
+        console.log('football: ', football(team));
+        console.log('champion: ', football(team, 1));
+
+        var numbers = [0, 1, 2, 3, 4, 5];
+        var combNumber = function (numbers) {
+            var result = [];
+            var findComb = function (target, arr) {
+                if (target.length === 5) {
+                    var temp = target.join('');
+                    temp[0] !== '0' && temp % 2 === 1 && result.push(target.join(''));
+                } else {
+                    arr.forEach(item => {
+                        findComb(target.concat(item), arr.filter(num => num !== item));
+                    });
+                }
+            };
+            findComb([], numbers);
+            return result;
+        };
+        console.log('combNumber: ', combNumber(numbers));
+
+        var plan = {
+            general: ['普通1', '普通2', '普通3', '普通4'],
+            luxury: ['豪华1', '豪华2', '豪华3', '豪华4', '豪华5']
+        };
+        var planComb = function (plan) {
+            var general = { plan: plan.general, result: [] };
+            var luxury = { plan: plan.luxury, result: [] };
+            var total = { plan: [...plan.general, ...plan.luxury], result: [] };
+            var planGroup = result = [];
+
+            var getPlanComb = function (target, arr, num) {
+                if (target.length === num) {
+                    var flag = planGroup.some(item => target.every(planName => item.includes(planName)));
+                    !flag && planGroup.push(target);
+                } else {
+                    arr.forEach(item => {
+                        getPlanComb(target.concat(item), arr.filter(filterItem => filterItem !== item), num);
+                    });
+                }
+            };
+
+            [general, luxury, total].forEach(item => {
+                planGroup = [];
+                getPlanComb([], item.plan, 4);
+                planGroup.forEach(plan => item.result.push(plan.join('')));
+            });
+
+            total.result.forEach(item => {
+                !general.result.includes(item) && !luxury.result.includes(item) && result.push(item);
+            });
+            return result;
+        };
+        console.log('planComb: ', planComb(plan));
+   </script>
+</html>

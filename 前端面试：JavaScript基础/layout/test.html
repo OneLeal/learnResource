@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三栏布局</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        header, footer {
+            height: 50px;
+            background-color: #666;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .wrap {
+            margin-bottom: 50px;
+        }
+        
+        .clearFix:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+        
+        .clearFix {
+            *zoom: 1;
+        }
+
+        .container {
+            padding: 0 150px;
+        }
+        
+        .center, .left, .right {
+            float: left;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+        
+        .left, .right {
+            width: 150px;
+        }
+
+        .center {
+            width: 100%;
+            background-color: #ccc;
+        }
+        
+        .left {
+            margin-left: -100%;
+            position: relative;
+            right: 150px;
+            background-color: pink;
+        }
+        
+        .right {
+            margin-right: -150px;
+            background-color: #409EFF;
+        }
+
+        .main, .left-part, .right-part {
+            float: left;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .main {
+            width: 100%;
+        }
+
+        .left-part, .right-part {
+            width: 150px;
+            background-color: #409EFF;
+        }
+
+        .center-part {
+            margin: 0 150px;
+            background-color: #ccc;
+        }
+
+        .left-part {
+            margin-left: -100%;
+        }
+
+        .right-part {
+            margin-left: -150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>Header</header>
+        <div class="container clearFix">
+            <div class="center">Center</div>
+            <div class="left">Left</div>
+            <div class="right">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+
+    <div class="wrap">
+        <header>Header</header>
+        <div class="content clearFix">
+            <div class="main">
+                <div class="center-part">Center</div>
+            </div>
+            <div class="left-part">Left</div>
+            <div class="right-part">Right</div>
+        </div>
+        <footer>Footer</footer>
+    </div>
+</body>
+</html>

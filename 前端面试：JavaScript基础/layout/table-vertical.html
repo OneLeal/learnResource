@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格垂直布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, .wrap {
+            height: 100%;
+        }
+
+        .wrap {
+            display: table;
+            width: 100%;
+        }
+
+        .main {
+            height: calc(100% - 200px);
+            text-align: center;
+        }
+
+        .top, .bottom {
+            height: 100px;
+            background-color: #409EFF;
+            line-height: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="top">Top</div>
+        <div class="main">Main</div>
+        <div class="bottom">Bottom</div>
+    </div>
+</body>
+</html>

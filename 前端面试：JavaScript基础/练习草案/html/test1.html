@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件、闭包</title>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="music-list" id="music-list">
+            <li class="music-list-item">大田后生仔</li>
+            <li class="music-list-item">我的心在海对面</li>
+            <li class="music-list-item">去年夏天</li>
+        </ul>
+
+        <button class="load-more" id="music-load-more">加载更多</button>
+    </div>
+</body>
+<script type="text/javascript" src="../js/events.js"></script>
+<script type="text/javascript" src="../js/deepPractice.js"></script>
+<script type="text/javascript" src="../js/inherit.js"></script>
+<script type="text/javascript">
+    const music = ['大田后生仔', '我的心在海对面', '去年夏天'];
+    const musicBtn = document.getElementById('music-load-more');
+    const musicList = document.getElementById('music-list');
+
+    eventsBind('click', musicBtn, (e) => {
+       const sectionHtml = document.createDocumentFragment();
+       for (var i = 0; i < 3; i++) {
+           const li = document.createElement('li');
+           li.innerText = music[i];
+           li.className = 'music-list-item';
+           sectionHtml.appendChild(li);
+       }
+        musicList.appendChild(sectionHtml);
+    });
+
+    eventsBind('click', musicList, 'music-list-item', (e) => {
+        confirm(e.target.innerText);
+    });
+
+    // 缓存变量
+    var message = createCache();
+    message.set('name', '浅色星河');
+    message.set('age', '24');
+    message.set('info', { tags: ['music', 'playing'], job: '前端工程师', phone: '13332905448' });
+
+    var person = createCache();
+    person.set('name', '浅芷初夏');
+    person.set('age', '24');
+    person.set('info', { tags: ['study', 'reading'], job: '落魄前端在线烧烤', phone: '15639067881' });
+
+    // 测试深拷贝、深度比较
+    var deep_arr = ['A', 'B', 'C', [1, 2, 3], 'vue', { name: '浅色星河', age: 24, tags: ['reading', 'running'] }];
+    var deep_obj = { name: '浅芷初夏', details: { x: 2, y: 15, z: 3, des: ['red', 'blue'] }, num: 20 };
+
+    var copy_arr = deepClone(deep_arr);
+    var copy_obj = deepClone(deep_obj);
+
+    console.log(deepCompare(deep_arr, copy_arr), deepCompare(deep_obj, copy_obj));
+
+    copy_arr[0] = 'F';
+    copy_arr[3][3] = 4;
+    copy_arr[5]['age'] = 25;
+    copy_arr[5]['tags'][0] = 'playing';
+
+    copy_obj.info = '刷抖音';
+    copy_obj.details.x = 100;
+    copy_obj.details.des[0] = 'yellow';
+    copy_obj.details.des[2] = 'white';
+
+    console.log(deep_arr);
+    console.log(copy_arr);
+    console.log(deep_obj);
+    console.log(copy_obj);
+    console.log(deepCompare(deep_arr, copy_arr), deepCompare(deep_obj, copy_obj));
+</script>
+</html>
