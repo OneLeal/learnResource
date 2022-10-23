@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Point = void 0;
 var Point = /** @class */ (function () {
     function Point(x, y) {
         this.x = x;
@@ -23,4 +20,8 @@ var Point = /** @class */ (function () {
     };
     return Point;
 }());
-exports.Point = Point;
+var p1 = new Point(2, 2);
+var p2 = new Point(3, 4);
+p1.drawPoint();
+var distance = p1.calcArea(p2);
+console.log("distance: ", distance);

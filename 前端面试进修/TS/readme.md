@@ -23,5 +23,6 @@
 ```js
 // npm install -g typescript
 // tsc -v
+// tsc -t es6 xxx.ts
 // tsc xxx.ts
 ```

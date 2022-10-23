@@ -1,5 +1,3 @@
-import { Point } from "../utils/point";
-
 // 基础课: Boolean Number String
 let bool: boolean = true; // 指定变量类型是 boolean
 let number: number = 12; // 指定变量类型是 number
@@ -134,10 +132,3 @@ const arr: IOpts[] = [
 ];
 
 // ---------------------------------------------------------------
-
-// 进阶课: interface & class
-const p1 = new Point(2, 2);
-const p2 = new Point(3, 4);
-p1.drawPoint();
-const distance = p1.calcArea(p2);
-console.log("distance: ", distance);

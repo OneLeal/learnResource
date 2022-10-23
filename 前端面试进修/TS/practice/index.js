@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var point_1 = require("../utils/point");
 // 基础课: Boolean Number String
 var bool = true; // 指定变量类型是 boolean
 var number = 12; // 指定变量类型是 number
@@ -106,9 +103,3 @@ var arr = [
     { label: "离岸", value: "999", info: "离岸申请" },
 ];
 // ---------------------------------------------------------------
-// 进阶课: interface & class
-var p1 = new point_1.Point(2, 2);
-var p2 = new point_1.Point(3, 4);
-p1.drawPoint();
-var distance = p1.calcArea(p2);
-console.log("distance: ", distance);
