@@ -1,0 +1,77 @@
+基础题目：
+1. v-show 和 v-if 的区别；（css 与 dom 操作）
+2. 为何 v-for 中要使用 key；（diff 算法通过 key 和 tag 来判断是否是同一个 vnode，提升渲染性能）
+3. 描述 vue 的生命周期；（看文档）
+4. vue 组件如何通讯；（props 自定义事件 this.$emit vuex）
+5. 描述组件渲染和更新的过程；(看文档：深入响应式原理)
+6. 双向数据绑定 v-model 的实现原理；
+（input 元素的 value = this.name; 绑定 input 事件：this.name = $event.target.value; data 更新触发 render 函数）
+7. 对MVVM的理解；（看文档图）
+8. computed 的特点；（缓存 data，同步计算，不可直接修改）
+9. 为何 data 必须是一个函数；
+（看文档；每个实例可以维护一份被返回对象的独立的拷贝；如果不是将影响所有实例，因为.vue文件编译完成后是一个类）
+10. ajax应该放在哪个生命周期；（看文档）
+11. 如何将所有的 prop 传递给子组件；（<User v-bind='$props' />）
+12. 如何自己实现 v-model；（看文档）
+13. 如何抽取多个组件的相同逻辑；（使用 mixin）
+14. 何时使用异步组件；（加载大组件、路由异步加载）
+15. 何时使用 keep-alive；（需要缓存的场景，如tab框切换，性能优化）
+16. 何时使用 beforeDestroy；（解绑事件 $off ；Dom 事件）
+17. 关于插槽；（看文档）
+18. mutation 与 action 的区别；（同步与异步；原子操作与整合操作）
+19. hash 路由与 history 路由的区别；（看笔记）
+20. 什么是 Virtual Dom；
+21. vue 响应式原理；
+22. vue 如何监听数组变化；（重新定义 Array.prototype，重写 push、pop 等方法）；
+23. diff 算法的时间复杂度和优化方式及原理；
+24. diff 算法的运算过程；（自己琢磨）
+25. vue 的异步渲染；（看笔记）
+26. vue 性能优化；
+（合理使用 v-show 和 v-if、computed，销毁事件，v-for 加 key，使用异步组件，keep-alive，控制 data 层级）
+
+一、vue 组件化：数据驱动视图
+传统组件只是静态渲染，更新依赖于对 Dom 的操作；
+MVVM、setState 是数据驱动视图，更改数据，驱动视图，不再操作 Dom；
+
+二、vue 响应式：data 变化立即触发视图更新
+核心 Api：Object.defineProperty （vue 3.0 启用 Proxy）；
+缺点：
+1. 深度监听计算量大，需要一次递归完；
+2. 无法监听新增/删除属性 （Vue.Set/Vue.delete）；
+3. 无法原生监听数组，需要特殊处理；
+
+三、vdom：js 模拟 dom
+新旧 vnode 对比，计算出最小更新范围，然后更新 Dom；
+
+四、模板编译：
+1. 编译为 render 函数，执行 render 函数后返回 vnode；
+2. 基于 vnode 再执行 patch 和 diff；
+3. 使用 webpack （vue-cli）时，会在开发环境下编译模板；
+
+五、vue 组件如何完成渲染和更新？
+
+渲染：
+1. 解析模板为 render 函数；
+2. 触发响应式监听 data 属性 getter setter；
+3. 执行 render 函数生成 vnode；
+4. patch/diff；
+
+更新：
+1. 修改 data，触发 setter(此前在 getter 中已经被监听)；
+2. 执行 render 函数生成 newVnode；
+3. diff/patch(vnode, newVnode)；
+
+vue 组件的异步渲染：汇总 data 的修改，一次更新视图，减少 DOM 操作次数，提高性能；
+
+关于路由的哈希模式和历史模式：
+哈希路由：hash 变化会触发页面跳转但不刷新页面，后台拿不到 hash；
+window.onhashchange();
+
+历史路由：url规范路由，前端路由跳转，不刷新页面；
+history.pushState();
+window.onpopstate();
+需要后端支持
+
+vue3 新特性 （standby）
+
+webpack：

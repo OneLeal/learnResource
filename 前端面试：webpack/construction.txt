@@ -1,0 +1,32 @@
+webpack 配置与使用：
+1. 安装 node （node -v 查看版本）；
+2. 初始化 npm 环境：npm init -y;
+3. 给包文件里的 author 和 keywords 添加描述；
+4. npm i webpack webpack-cli -D 安装 webpack 和其脚手架；
+5. 创建代码目录 src 和配置文件 webpack.config.js；
+6. 包文件中的 script 对象添加 "build": "webpack" （webpack --config webpack.config.js）
+
+webpack 常用插件的使用：
+1. npm i html-webpack-plugin -D （解析 html 的插件）
+2. npm i webpack-dev-server -D （启动服务）
+
+配置 babel 模块：
+1. npm i babel-loader @babel/preset-env @babel/core -D
+2. 创建 .babelrc 文件
+3. 在 webpack 配置文件的 module 中设置匹配规则
+
+配置样式模块：
+1. npm i css-loader style-loader -D
+2. 在 webpack 配置文件的 module 中设置匹配规则
+
+
+知识集合：
+1. npm i module_name  -S  = >  npm install module_name --save 写入到 dependencies 对象
+2. npm i module_name  -D  => npm install module_name --save-dev 写入到 devDependencies 对象
+3. npm i module_name  -g 全局安装
+
+关于 webpack：
+1. entry 规定入口文件，一个或者多个
+2. output 规定输出文件的位置
+3. loader 各个类型的转换工具
+4. plugin 打包过程中各种自定义功能的插件

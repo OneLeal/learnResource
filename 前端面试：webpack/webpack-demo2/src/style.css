@@ -1,0 +1,17 @@
+html, body, p, div {
+    padding: 0;
+    margin: 0;
+}
+
+.website {
+    font-size: 12px;
+    margin-top: 20px;
+    color: #ff2c39;
+}
+
+.ctx-default {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px #999 dashed;
+}
