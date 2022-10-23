@@ -15,7 +15,7 @@ class Point implements IPoint {
   }
 
   drawPoint(): void {
-    console.log("x, y: ", this.x, this.y);
+    console.log("两点坐标 x y: ", this.x, this.y);
   }
 
   calcArea(data: IPoint): number {
@@ -38,4 +38,4 @@ const p1 = new Point(2, 2);
 const p2 = new Point(3, 4);
 p1.drawPoint();
 const distance = p1.calcArea(p2);
-console.log("distance: ", distance);
+console.log("两点间距: ", distance);

@@ -4,7 +4,7 @@ var Point = /** @class */ (function () {
         this.y = y;
     }
     Point.prototype.drawPoint = function () {
-        console.log("x, y: ", this.x, this.y);
+        console.log("两点坐标 x y: ", this.x, this.y);
     };
     Point.prototype.calcArea = function (data) {
         var x = Math.abs(data.getX() - this.x);
@@ -24,4 +24,4 @@ var p1 = new Point(2, 2);
 var p2 = new Point(3, 4);
 p1.drawPoint();
 var distance = p1.calcArea(p2);
-console.log("distance: ", distance);
+console.log("两点间距: ", distance);
