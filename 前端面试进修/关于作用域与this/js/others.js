@@ -1,6 +1,32 @@
 // 手写防抖函数
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+      timer = null;
+    }, delay);
+  };
+}
 
 // 手写节流函数
+function throttle(fn, delay) {
+  let timer = null;
+  return function () {
+    if (timer) {
+      return;
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+      timer = null;
+    }, delay);
+  };
+}
 
 // 利用闭包实现一个计数器，调用一次自增 1
 function calcCounter() {

@@ -10,11 +10,12 @@
     <h1>练习题</h1>
   </body>
   <!-- <script src="./js/trafficLight.js"></script> -->
-  <!-- <script src="./js/lazyMan.js"></script> -->
+  <script src="./js/lazyMan.js"></script>
   <!-- <script src="./js/watcher.js"></script> -->
   <!-- <script src="./js/uniqueArray.js"></script> -->
   <!-- <script src="./js/handleString.js"></script> -->
-  <script src="./js/handleObj.js"></script>
+  <!-- <script src="./js/handleObj.js"></script> -->
+  <!-- <script src="./js/deepClone.js"></script> -->
   <!-- <script src="./js/arrayFlat.js"></script> -->
   <script>
     // 红绿灯问题:
@@ -22,9 +23,9 @@
     // start("red", 3000);
 
     // 懒人问题:
-    // const schedule = { sleep: 3000, play: 2000, eat: 1000 };
-    // const man1 = new LazyMan("Jonh");
-    // man1.sleep(schedule.sleep).eat(schedule.eat).play(schedule.play);
+    const schedule = { sleep: 3000, play: 2000, eat: 1000 };
+    const man1 = new LazyMan("Jonh");
+    man1.sleep(schedule.sleep).eat(schedule.eat).play(schedule.play);
 
     // const man2 = new LazyManForPromise("Sam");
     // man2.sleep(schedule.sleep).eat(schedule.eat).play(schedule.play);
