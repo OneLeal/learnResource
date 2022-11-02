@@ -7,7 +7,7 @@
   3. 触发 hook: beforeCreate;
   4. 调用 initState 方法初始化 props methods data computed watch;
   5. 触发 hook: created;
-  6. 开始编译模板，把 template 编译成 render function 并执行，生成一个个 virtual dom;
+  6. 开始编译模板，把 template 编译成 render function 并执行，生成 virtual tree;
   7. 触发 hook: beforeMount;
   8. 把 virtual tree 挂载到 el 上;
   9. 触发 hook: mounted;
@@ -56,13 +56,13 @@
   5. createComputedGetter 返回 computedGetter 方法，形成闭包缓存 key;
   6. computedGetter 方法中通过 key 取到该计算属性的 watcher;
   7. watcher.evaluate() / watcher.depend() / return watcher.value;
-  8. Watcher 实例化时，保存 getter，lazy = true，value 是 undefined;
+  8. Watcher 实例化时，保存 getter，dirty = lazy，value 是 undefined;
   9. 当计算属性被访问时，computedGetter 会执行;
-  10. evaluate 方法中调用 get 方法，并设置 lazy = false;
+  10. evaluate 方法中调用 get 方法，并设置 dirty = false;
   11. get 方法执行时，pushTarget() / getter.call(vm, vm) / popTarget();
   12. 所以数据能收集到计算属性的 watcher，而后 watcher.depend() 让数据收集页面的 watcher;
   13. return watcher.value 页面取到值，完成渲染;
-  14. 数据变化时，按顺序先触发计算属性的 watcher，走 update 时只把 lazy = true;
+  14. 数据变化时，按顺序先触发计算属性的 watcher，走 update 时只把 dirty = true;
   15. 而后触发页面的 render-watcher 页面渲染重新访问计算属性，回到步骤 9;
 
   - 计算属性同步的意义在于它的 function | get 中不能写入异步代码，否则页面可能读不到值;
@@ -102,16 +102,16 @@
 1. watch 的依赖优先被收集;
 2. watch 没有被挂载在 vm 上;
 3. 因为 watch 的依赖优先被收集，所以数据变化时其 handler 会更早执行;
-4. 而对于 computed 来说只是改变其观察者的 lazy，要等到页面重新渲染才会去计算并读取新值;
+4. 而对于 computed 来说只是改变其观察者的 dirty，要等到页面重新渲染才会去计算并读取新值;
 5. watch 的观察者会被一个队列维护，computed 则不会;
-6. 数据更新时: watch handle → beforeUpdate → computed() | computed.get() → updated;
+6. 数据更新时: watch handler → beforeUpdate → computed() | computed.get() → updated;
 7. 在依赖关系上，二者的依赖可能会被多个数据收集，但 watch 的回调只会被触发一次;
 8. 首次加载时，computed-get 会走一次，而 watch 的回调要设置 immediate = true 才能触发;
 
 ### 为什么 watch 的观察者需要一个队列去维护，而 computed 却不用
 
 1. 当一个 computed 中使用了多个数据时，这些数据都会去收集 computed 的依赖;
-2. 当多个数据变化时，update 方法多次调用但仅仅只是对 lazy 变量做赋值操作;
+2. 当多个数据变化时，update 方法多次调用但仅仅只是对 dirty 变量做赋值操作;
 3. 当页面重新渲染时，数据已更新，此时访问 computed 只进行了一次计算就读取到了新值;
 4. 当页面上有多个 watch 变化时，queueWatcher 会被多次调用，依赖都会存入一个队列维护;
 5. flushSchedulerQueue 最终会被当做一个宏/微任务的回调执行，按序一次行执行 run 方法;

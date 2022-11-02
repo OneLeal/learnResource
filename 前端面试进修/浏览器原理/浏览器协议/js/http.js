@@ -17,7 +17,7 @@ function requestHttp(opts) {
 
   const http = new XMLHttpRequest();
   return new Promise((resolve, reject) => {
-    const arr = [];
+    let arr = [];
     let sendData = null;
     let encodeData = "";
 
