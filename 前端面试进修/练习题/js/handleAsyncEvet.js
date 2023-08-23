@@ -192,3 +192,66 @@ function handleError(eventName, error) {
 const task = Promise.resolve();
 businessScene();
 // ===================================================================================================================
+
+// ==================================================  第二种处理方式  ==================================================
+/**
+ * 声明一个类用于处理多个异步事件:
+ * 1. list 用于存放异步事件;
+ * 2. 一次只处理一个事件，running 存放处理状态;
+ * 3. 可通过 sleep 方法手动设置延迟处理时间;
+ */
+class TaskList {
+  list = [];
+  running = false;
+
+  constructor() {}
+
+  run() {
+    if (!this.running && this.list.length) {
+      const next = this.list.shift();
+      next && next();
+    }
+  }
+
+  add(fn, type) {
+    this.list.push(async () => {
+      try {
+        this.running = true;
+        await fn();
+      } catch (error) {
+        console.log(`error of ${type} occur: ${error.message}`);
+      } finally {
+        this.running = false;
+        this.run();
+      }
+    });
+  }
+}
+
+const sleep = () => new Promise((r) => setTimeout(() => r(), 500));
+const queue = new TaskList();
+
+// 传入一个事件名数组，一次性设置多个异步事件
+const createTask = (list) => {
+  for (let name of list) {
+    queue.add(
+      () =>
+        new Promise(async (resolve, reject) => {
+          await sleep();
+          resolve();
+        }),
+      name
+    );
+  }
+};
+
+// 第一次设置 4 个异步事件
+createTask(["first fn", "second fn", "thrid fn", "fourth fn"]);
+queue.run();
+
+// 延时后再进行设置
+setTimeout(() => {
+  createTask(["eat", "play", "sleep", "work"]);
+  queue.run();
+}, 2500);
+// ===================================================================================================================
